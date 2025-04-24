@@ -1,0 +1,97 @@
+.menuContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+}
+
+.menuSection {
+  margin-bottom: 4rem;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #f39c12;
+  text-align: center;
+}
+
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.menuItem {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menuItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.menuImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.menuItem:hover .menuImage {
+  transform: scale(1.05);
+}
+
+.itemName {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin: 1rem 1.5rem 0.5rem;
+  font-weight: 600;
+}
+
+.itemDescription {
+  color: #666;
+  margin: 0 1.5rem 1rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.itemPrice {
+  color: #f39c12;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 1.5rem 1.5rem;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .menuSection {
+    padding: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .itemsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+} 

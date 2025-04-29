@@ -6,18 +6,16 @@ interface ImageProps {
   alt: string;
   width?: number;
   height?: number;
-  className?: string;
 }
 
 const CustomImage: React.FC<ImageProps> = ({ 
   src, 
   alt, 
   width = 500, 
-  height = 300,
-  className = ''
+  height = 300
 }) => {
   return (
-    <div className={`relative ${className}`}>
+    <div className="relative">
       <Image
         src={src}
         alt={alt}

@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -11,13 +11,10 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-8">
             <li>
-              <Link href="/promotions" className="text-lg hover:text-[#D2B48C] transition-colors">Акции</Link>
+              <Link href="/menu" className="text-lg hover:text-[#D2B48C] transition-colors">Меню</Link>
             </li>
             <li>
               <Link href="/about" className="text-lg hover:text-[#D2B48C] transition-colors">О нас</Link>
-            </li>
-            <li>
-              <Link href="/menu" className="text-lg hover:text-[#D2B48C] transition-colors">Меню</Link>
             </li>
             <li>
               <Link href="/contacts" className="text-lg hover:text-[#D2B48C] transition-colors">Контакты</Link>
@@ -29,4 +26,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header; 

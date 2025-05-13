@@ -1,0 +1,55 @@
+.desserts {
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.desserts h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+.dessertsItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.dessertItem {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 250px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.dessertItem:hover {
+  transform: translateY(-5px);
+}
+
+.dessertItem img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.dessertItem h3 {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.dessertItem p {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.dessertItem .price {
+  font-weight: bold;
+  color: #e63946;
+  font-size: 1.2rem;
+} 

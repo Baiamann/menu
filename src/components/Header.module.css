@@ -1,0 +1,92 @@
+.header {
+  background-color: #8b4513;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.logo a::before {
+  content: "🍽️";
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.logo a:hover {
+  color: #d2b48c;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 2rem;
+}
+
+.navItem a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  padding: 0.5rem 1rem;
+  position: relative;
+  border-radius: 4px;
+}
+
+.navItem a:hover {
+  color: #d2b48c;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navItem a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #d2b48c;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.navItem a:hover::after {
+  width: 80%;
+}

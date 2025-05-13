@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --primary-color: #8B4513;
-  --secondary-color: #D2B48C;
-  --background-color: #F5F5DC;
-  --text-color: #4A4A4A;
-  --card-bg: #FFFFFF;
+  --primary-color: #8b4513;
+  --secondary-color: #d2b48c;
+  --background-color: #f5f5dc;
+  --text-color: #4a4a4a;
+  --card-bg: #ffffff;
 }
 
 @theme inline {
@@ -34,7 +34,7 @@ body {
   overflow-x: hidden;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 a {
@@ -56,7 +56,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer styles */
@@ -107,4 +107,3 @@ footer {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-

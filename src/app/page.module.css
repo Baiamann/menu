@@ -2,7 +2,7 @@
   min-height: 100vh;
   background-color: #f5f6fa;
 }
-
+ 
 @media (max-width: 768px) {
   .main {
     padding-top: 1rem;

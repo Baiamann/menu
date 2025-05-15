@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ['images.unsplash.com'],
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false };
@@ -11,4 +11,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

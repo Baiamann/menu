@@ -1,23 +1,23 @@
-.drinks {
+.desserts {
   padding: 2rem;
   background-color: #f8f9fa;
 }
 
-.drinks h2 {
+.desserts h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: #333;
   font-size: 2rem;
 }
 
-.drinksItems {
+.dessertsItems {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
 
-.drinkItem {
+.dessertItem {
   background: white;
   border-radius: 8px;
   padding: 1rem;
@@ -26,11 +26,11 @@
   transition: transform 0.2s;
 }
 
-.drinkItem:hover {
+.dessertItem:hover {
   transform: translateY(-5px);
 }
 
-.drinkItem img {
+.dessertItem img {
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -38,18 +38,18 @@
   margin-bottom: 1rem;
 }
 
-.drinkItem h3 {
+.dessertItem h3 {
   margin: 0.5rem 0;
   color: #333;
 }
 
-.drinkItem p {
+.dessertItem p {
   color: #666;
   margin-bottom: 0.5rem;
 }
 
-.drinkItem .price {
+.price {
   font-weight: bold;
   color: #e63946;
   font-size: 1.2rem;
-} 
+}

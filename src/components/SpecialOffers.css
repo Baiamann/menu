@@ -7,7 +7,7 @@
 .specialOffers h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #8B4513;
+  color: #8b4513;
   font-size: 2rem;
   position: relative;
   display: inline-block;
@@ -16,7 +16,7 @@
 }
 
 .specialOffers h2::after {
-  content: '🔥';
+  content: "🔥";
   position: absolute;
   right: -2rem;
   top: 50%;
@@ -78,4 +78,4 @@
   font-weight: bold;
   color: #e63946;
   font-size: 1.2rem;
-} 
+}

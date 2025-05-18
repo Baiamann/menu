@@ -8,6 +8,7 @@ import DrinksList from "@/components/DrinksList";
 import DessertsList from "@/components/DessertsList";
 import SnacksList from "@/components/SnacksList";
 import Footer from "@/components/Footer";
+import Menu from "@/components/Menu";
 
 export default function Home() {
   const [category, setCategory] = useState("Основное");
@@ -25,7 +26,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Кнопки выбора категории */}
         <div className="flex justify-center gap-6 mb-10">
           {["Основное", "Десерты", "Напитки", "Закуски", "Спецпредложения"].map(
             (cat) => (
@@ -49,10 +49,10 @@ export default function Home() {
           )}
         </div>
 
-        {/* Отображение выбранной категории */}
         {category === "Спецпредложения" && <SpecialOffers />}
         {category === "Основное" && (
           <>
+            <Menu />
             <MenuList />
             <SnacksList />
           </>

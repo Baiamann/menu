@@ -10,14 +10,14 @@
   font-size: 2rem;
 }
 
-.snacksItems {
+.snacks-items {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
 
-.snackItem {
+.snack-item {
   background: white;
   border-radius: 8px;
   padding: 1rem;
@@ -26,11 +26,11 @@
   transition: transform 0.2s;
 }
 
-.snackItem:hover {
+.snack-item:hover {
   transform: translateY(-5px);
 }
 
-.snackItem img {
+.snack-item img {
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -38,18 +38,18 @@
   margin-bottom: 1rem;
 }
 
-.snackItem h3 {
+.snack-item h3 {
   margin: 0.5rem 0;
   color: #333;
 }
 
-.snackItem p {
+.snack-item p {
   color: #666;
   margin-bottom: 0.5rem;
 }
 
-.snackItem .price {
+.snack-item .price {
   font-weight: bold;
   color: #e63946;
   font-size: 1.2rem;
-} 
+}

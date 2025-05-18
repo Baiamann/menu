@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import MenuImage from "./MenuImage";
 
@@ -70,22 +72,22 @@ const menuItems: MenuItem[] = [
 
 const Menu: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center mb-8">Наше меню</h2>
+    <div className="max-w-7xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-bold text-center text-[#4E2A1E] mb-12">
+        Наше меню
+      </h2>
 
-      <div className="flex flex-wrap -mx-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {menuItems.map((item) => (
           <div
             key={item.id}
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8"
+            className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col"
           >
-            <div className="bg-white rounded-lg shadow-lg p-4 h-full flex flex-col">
-              <MenuImage dishName={item.name} imageUrl={item.imageUrl} />
-              <div className="mt-4 flex-grow">
-                <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
-                <p className="mt-2 text-gray-600">{item.description}</p>
-              </div>
-              <p className="mt-4 text-xl font-bold text-[#8B4513]">
+            <MenuImage dishName={item.name} imageUrl={item.imageUrl} />
+            <div className="p-4 flex flex-col flex-grow">
+              <h3 className="text-xl font-bold text-[#4E2A1E]">{item.name}</h3>
+              <p className="text-gray-600 mt-2 flex-grow">{item.description}</p>
+              <p className="text-[#8B4513] text-xl font-bold mt-4">
                 {item.price} ₽
               </p>
             </div>

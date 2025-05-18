@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import MenuImage from "./MenuImage";
 
 interface MenuItem {
   id: number;
@@ -17,84 +16,93 @@ const menuItems: MenuItem[] = [
     name: "Плов по-узбекски",
     description: "Традиционный узбекский плов с бараниной и желтой морковью",
     price: 450,
-    imageUrl: "/images/plov.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 2,
     name: "Манты",
     description: "Сочные манты с мясом и луком",
     price: 380,
-    imageUrl: "/images/manty.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1562967916-eb82221dfb29?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 3,
     name: "Шашлык",
     description: "Шашлык из баранины на углях",
     price: 520,
-    imageUrl: "/images/shashlik.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1543352634-68f0a8e6c02b?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 4,
     name: "Лагман",
     description: "Домашний лагман с говядиной и овощами",
     price: 400,
-    imageUrl: "/images/lagman.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1605478020978-041e49b53817?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 5,
     name: "Самса",
     description: "Сочная самса из тандыра с мясом и луком",
     price: 150,
-    imageUrl: "/images/samsa.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1617191510540-3f8d40d97a74?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 6,
     name: "Курдюк",
     description: "Жареный курдюк на шампуре",
     price: 300,
-    imageUrl: "/images/kurdyuk.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1571091718767-8b7e39cd02e6?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 7,
     name: "Чай зелёный",
     description: "Ароматный зелёный чай в пиале",
     price: 70,
-    imageUrl: "/images/tea.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 8,
     name: "Лепёшка",
     description: "Свежая лепёшка из тандыра",
     price: 50,
-    imageUrl: "/images/lepyoshka.jpg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
+import "./Menu.css";
+
 const Menu: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold text-center text-[#4E2A1E] mb-12">
-        Наше меню
-      </h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <section className="menu">
+      <h2 className="menu-title">Наше меню</h2>
+      <div className="menu-grid">
         {menuItems.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col"
-          >
-            <MenuImage dishName={item.name} imageUrl={item.imageUrl} />
-            <div className="p-4 flex flex-col flex-grow">
-              <h3 className="text-xl font-bold text-[#4E2A1E]">{item.name}</h3>
-              <p className="text-gray-600 mt-2 flex-grow">{item.description}</p>
-              <p className="text-[#8B4513] text-xl font-bold mt-4">
-                {item.price} ₽
-              </p>
+          <article key={item.id} className="menu-card">
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="menu-card-image"
+              loading="lazy"
+              width={320}
+              height={180}
+            />
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{item.name}</h3>
+              <p className="menu-card-description">{item.description}</p>
+              <p className="menu-card-price">{item.price} ₽</p>
             </div>
-          </div>
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

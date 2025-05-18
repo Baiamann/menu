@@ -1,5 +1,5 @@
 import React from "react";
-import "./SnacksList.css"; // 👈 обычный CSS-файл
+import "./SnacksList.css";
 
 const SnacksList = () => {
   const snacks = [
@@ -17,7 +17,7 @@ const SnacksList = () => {
       description: "Тонко нарезанная говядина с рукколой и пармезаном",
       price: 600,
       image:
-        "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1612874742236-f15ae09577d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     },
     {
       id: 3,
@@ -25,20 +25,22 @@ const SnacksList = () => {
       description: "Тартар из говядины с каперсами и луком",
       price: 700,
       image:
-        "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1625949489479-26a338d224fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     },
   ];
 
   return (
-    <section className="snacks">
-      <h2>Закуски</h2>
-      <div className="snacks-items">
+    <section className="menu">
+      <h2 className="menu-title">Закуски</h2>
+      <div className="menu-grid">
         {snacks.map((snack) => (
-          <div key={snack.id} className="snack-item">
+          <div key={snack.id} className="menu-card">
             <img src={snack.image} alt={snack.name} />
-            <h3>{snack.name}</h3>
-            <p>{snack.description}</p>
-            <p className="price">{snack.price} ₽</p>
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{snack.name}</h3>
+              <p className="menu-card-description">{snack.description}</p>
+              <p className="menu-card-price">{snack.price} ₽</p>
+            </div>
           </div>
         ))}
       </div>

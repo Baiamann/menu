@@ -1,55 +1,94 @@
-.snacks {
-  padding: 2rem;
-  background-color: #f8f9fa;
+.menu {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fef9f4;
+  color: #4e2a1e;
 }
 
-.snacks h2 {
+.menu-title {
   text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
-  font-size: 2rem;
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(78, 42, 30, 0.2);
 }
 
-.snacks-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
-.snack-item {
+.menu-card {
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 250px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(78, 42, 30, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.snack-item:hover {
-  transform: translateY(-5px);
+.menu-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(78, 42, 30, 0.25);
 }
 
-.snack-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 4px;
+.menu-card-content {
+  padding: 1.2rem 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.menu-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #6b3c16;
+}
+
+.menu-card-description {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: #7d5c3b;
+  line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.snack-item h3 {
-  margin: 0.5rem 0;
-  color: #333;
+.menu-card-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b35e1e;
+  text-align: right;
 }
 
-.snack-item p {
-  color: #666;
-  margin-bottom: 0.5rem;
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 5px solid #b35e1e;
+  transition: transform 0.3s ease;
 }
 
-.snack-item .price {
-  font-weight: bold;
-  color: #e63946;
-  font-size: 1.2rem;
+.menu-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .menu-card-price {
+    font-size: 1.1rem;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
 }

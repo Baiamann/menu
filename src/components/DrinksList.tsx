@@ -30,15 +30,17 @@ const DrinksList = () => {
   ];
 
   return (
-    <section className="drinks">
-      <h2>Напитки</h2>
-      <div className="drinksItems">
+    <section className="menu">
+      <h2 className="menu-title">Напитки</h2>
+      <div className="menu-grid">
         {drinks.map((drink) => (
-          <div key={drink.id} className="drinkItem">
+          <div key={drink.id} className="menu-card">
             <img src={drink.image} alt={drink.name} />
-            <h3>{drink.name}</h3>
-            <p>{drink.description}</p>
-            <p className="price">{drink.price} ₽</p>
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{drink.name}</h3>
+              <p className="menu-card-description">{drink.description}</p>
+              <p className="menu-card-price">{drink.price} ₽</p>
+            </div>
           </div>
         ))}
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import "./Menu.css";
 
 interface MenuItem {
   id: number;
@@ -51,41 +52,41 @@ const menuItems: MenuItem[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1617191510540-3f8d40d97a74?auto=format&fit=crop&w=800&q=80",
   },
-  {
-    id: 6,
-    name: "Курдюк",
-    description: "Жареный курдюк на шампуре",
-    price: 300,
-    imageUrl:
-      "https://images.unsplash.com/photo-1571091718767-8b7e39cd02e6?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 7,
-    name: "Чай зелёный",
-    description: "Ароматный зелёный чай в пиале",
-    price: 70,
-    imageUrl:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 8,
-    name: "Лепёшка",
-    description: "Свежая лепёшка из тандыра",
-    price: 50,
-    imageUrl:
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
-  },
 ];
 
-import "./Menu.css";
-
 const Menu: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const openModal = (item: MenuItem) => {
+    setSelectedItem(item);
+    setQuantity(1);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
+  const addToCart = () => {
+    if (selectedItem) {
+      alert(`Добавлено в корзину: ${quantity} шт. "${selectedItem.name}"`);
+      closeModal();
+    }
+  };
+
   return (
     <section className="menu">
-      <h2 className="menu-title">Наше меню</h2>
+      <h2 className="menu-title">Основные блюда</h2>
       <div className="menu-grid">
         {menuItems.map((item) => (
-          <article key={item.id} className="menu-card">
+          <article
+            key={item.id}
+            className="menu-card"
+            onClick={() => openModal(item)}
+          >
             <img
               src={item.imageUrl}
               alt={item.name}
@@ -102,6 +103,31 @@ const Menu: React.FC = () => {
           </article>
         ))}
       </div>
+
+      {isModalOpen && selectedItem && (
+        <div className="modalOverlay" onClick={closeModal}>
+          <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            <h3>{selectedItem.name}</h3>
+            <p>{selectedItem.description}</p>
+            <p>Цена: {selectedItem.price} ₽</p>
+
+            <label>
+              Количество:
+              <input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+            </label>
+
+            <div className="modalButtons">
+              <button onClick={addToCart}>Добавить в корзину</button>
+              <button onClick={closeModal}>Отмена</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

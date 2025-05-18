@@ -30,15 +30,17 @@ const DessertsList = () => {
   ];
 
   return (
-    <section className="desserts">
-      <h2>Десерты</h2>
-      <div className="dessertsItems">
+    <section className="menu">
+      <h2 className="menu-title">Десерты</h2>
+      <div className="menu-grid">
         {desserts.map((dessert) => (
-          <div key={dessert.id} className="dessertItem">
+          <div key={dessert.id} className="menu-card">
             <img src={dessert.image} alt={dessert.name} />
-            <h3>{dessert.name}</h3>
-            <p>{dessert.description}</p>
-            <p className="price">{dessert.price} ₽</p>
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{dessert.name}</h3>
+              <p className="menu-card-description">{dessert.description}</p>
+              <p className="menu-card-price">{dessert.price} ₽</p>
+            </div>
           </div>
         ))}
       </div>

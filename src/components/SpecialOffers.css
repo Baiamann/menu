@@ -1,81 +1,94 @@
-.specialOffers {
-  padding: 2rem;
-  background-color: #fff5e6;
-  margin-top: 2rem;
+.menu {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fef9f4;
+  color: #4e2a1e;
 }
 
-.specialOffers h2 {
+.menu-title {
   text-align: center;
-  margin-bottom: 2rem;
-  color: #8b4513;
-  font-size: 2rem;
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(78, 42, 30, 0.2);
 }
 
-.specialOffers h2::after {
-  content: "🔥";
-  position: absolute;
-  right: -2rem;
-  top: 50%;
-  transform: translateY(-50%);
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
-.specialItems {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-.specialItem {
+.menu-card {
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 250px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  position: relative;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(78, 42, 30, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.specialItem:hover {
-  transform: translateY(-5px);
+.menu-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(78, 42, 30, 0.25);
 }
 
-.specialItem img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 4px;
+.menu-card-content {
+  padding: 1.2rem 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.menu-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #6b3c16;
+}
+
+.menu-card-description {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: #7d5c3b;
+  line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.specialItem h3 {
-  margin: 0.5rem 0;
-  color: #333;
+.menu-card-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b35e1e;
+  text-align: right;
 }
 
-.specialItem p {
-  color: #666;
-  margin-bottom: 0.5rem;
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 5px solid #b35e1e;
+  transition: transform 0.3s ease;
 }
 
-.prices {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.menu-card:hover img {
+  transform: scale(1.05);
 }
 
-.originalPrice {
-  text-decoration: line-through;
-  color: #999;
-  font-size: 1rem;
-}
-
-.discountPrice {
-  font-weight: bold;
-  color: #e63946;
-  font-size: 1.2rem;
+/* Адаптив */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .menu-card-price {
+    font-size: 1.1rem;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "./SpecialOffers.css"; // обычный CSS импорт
+import "./SpecialOffers.css";
 
 const SpecialOffers = () => {
   const specialItems = [
@@ -33,17 +33,29 @@ const SpecialOffers = () => {
   ];
 
   return (
-    <section className="specialOffers">
-      <h2>Акция дня</h2>
-      <div className="specialItems">
+    <section className="menu">
+      <h2 className="menu-title">Акция дня</h2>
+      <div className="menu-grid">
         {specialItems.map((item) => (
-          <div key={item.id} className="specialItem">
+          <div key={item.id} className="menu-card">
             <img src={item.image} alt={item.name} />
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-            <div className="prices">
-              <span className="originalPrice">{item.originalPrice} ₽</span>
-              <span className="discountPrice">{item.discountPrice} ₽</span>
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{item.name}</h3>
+              <p className="menu-card-description">{item.description}</p>
+              <div className="menu-card-price">
+                <span
+                  style={{
+                    textDecoration: "line-through",
+                    color: "#a9a9a9",
+                    marginRight: "0.5rem",
+                  }}
+                >
+                  {item.originalPrice} ₽
+                </span>
+                <span style={{ color: "#b35e1e", fontWeight: "bold" }}>
+                  {item.discountPrice} ₽
+                </span>
+              </div>
             </div>
           </div>
         ))}

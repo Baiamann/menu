@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "@/components/Header";
 import SpecialOffers from "@/components/SpecialOffers";
 import MenuList from "@/components/MenuList";
 import DrinksList from "@/components/DrinksList";
@@ -17,7 +16,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen pt-24 bg-gray-50">
-      <Header />
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="title">Welcome to Gourmet Haven</h2>
@@ -39,11 +37,7 @@ export default function Home() {
         </div>
 
         {category === "Спецпредложения" && <SpecialOffers />}
-        {category === "Основное" && (
-          <>
-            <Menu />
-          </>
-        )}
+        {category === "Основное" && <Menu />}
         {category === "Десерты" && <DessertsList />}
         {category === "Напитки" && <DrinksList />}
         {category === "Закуски" && <SnacksList />}

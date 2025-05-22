@@ -1,0 +1,104 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1,
+h2,
+h3 {
+  color: #b35e1e;
+}
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.cart-list li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.cart-list img {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.cart-item-info h3 {
+  margin: 0 0 0.3rem 0;
+}
+
+.cart-item-info p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.total-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  border-top: 2px solid #b35e1e;
+  padding-top: 1rem;
+}
+
+.order-form {
+  margin-top: 2rem;
+  max-width: 400px;
+}
+
+.order-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.order-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.order-form button {
+  background-color: #b35e1e;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.order-form button:hover {
+  background-color: #8f4817;
+}
+
+.empty-cart {
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.link-home {
+  color: #b35e1e;
+  text-decoration: underline;
+  cursor: pointer;
+}

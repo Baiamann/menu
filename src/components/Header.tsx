@@ -1,15 +1,13 @@
-"use client"; // Важно! Эта строка должна быть первой в файле
+"use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import "./Header.css";
+import { useCart } from "@/app/context/CartContext";
 
 const Header = () => {
-  const [cartCount, setCartCount] = useState(1);
-
-  const handleCartClick = () => {
-    console.log("Корзина нажата");
-  };
+  const { cart } = useCart();
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header className="header">
@@ -25,16 +23,13 @@ const Header = () => {
             <li className="navItem">
               <Link href="/about">About</Link>
             </li>
+            <li className="navItem">
+              <Link href="/corzina">
+                🛒 <span className="cart-count">{cartCount}</span>
+              </Link>
+            </li>
           </ul>
         </nav>
-        <div
-          className="cart-icon"
-          onClick={handleCartClick}
-          style={{ cursor: "pointer", position: "relative" }}
-        >
-          🛒
-          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-        </div>
       </div>
     </header>
   );

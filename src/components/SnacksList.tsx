@@ -1,41 +1,83 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 import "./SnacksList.css";
 
 const SnacksList = () => {
+  const { addToCart } = useCart();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSnack, setSelectedSnack] = useState<any>(null);
+  const [quantity, setQuantity] = useState(1);
+
   const snacks = [
     {
       id: 1,
-      name: "Брускетта",
-      description: "Итальянские тосты с томатами и базиликом",
-      price: 400,
-      image:
-        "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      name: "Картофель фри",
+      description: "Хрустящий картофель с соусом",
+      price: 250,
+      imageUrl:
+        "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80",
     },
     {
       id: 2,
-      name: "Карпаччо",
-      description: "Тонко нарезанная говядина с рукколой и пармезаном",
-      price: 600,
-      image:
-        "https://images.unsplash.com/photo-1612874742236-f15ae09577d3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      name: "Начос",
+      description: "Чипсы с сыром, перцем и соусом",
+      price: 350,
+      imageUrl:
+        "https://images.unsplash.com/photo-1582169296194-d4d644c48081?auto=format&fit=crop&w=500&q=80",
     },
     {
       id: 3,
-      name: "Тартар",
-      description: "Тартар из говядины с каперсами и луком",
-      price: 700,
-      image:
-        "https://images.unsplash.com/photo-1625949489479-26a338d224fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+      name: "Крылышки",
+      description: "Куриные крылышки в соусе барбекю",
+      price: 450,
+      imageUrl:
+        "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=80",
+    },
+    {
+      id: 4,
+      name: "Сырные палочки",
+      description: "Хрустящие палочки с моцареллой",
+      price: 300,
+      imageUrl:
+        "https://images.unsplash.com/photo-1562967915-92ae0c320a1c?auto=format&fit=crop&w=500&q=80",
+    },
+    {
+      id: 5,
+      name: "Кальмары",
+      description: "Жареные кальмары с соусом",
+      price: 400,
+      imageUrl:
+        "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=500&q=80",
     },
   ];
+
+  const openModal = (snack: any) => {
+    setSelectedSnack(snack);
+    setQuantity(1);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedSnack(null);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedSnack && quantity > 0) {
+      addToCart(selectedSnack, quantity);
+      closeModal();
+    }
+  };
 
   return (
     <section className="menu">
       <h2 className="menu-title">Закуски</h2>
       <div className="menu-grid">
         {snacks.map((snack) => (
-          <div key={snack.id} className="menu-card">
-            <img src={snack.image} alt={snack.name} />
+          <div key={snack.id} className="menu-card" onClick={() => openModal(snack)}>
+            <img src={snack.imageUrl} alt={snack.name} />
             <div className="menu-card-content">
               <h3 className="menu-card-title">{snack.name}</h3>
               <p className="menu-card-description">{snack.description}</p>
@@ -44,6 +86,43 @@ const SnacksList = () => {
           </div>
         ))}
       </div>
+
+      {isModalOpen && selectedSnack && (
+        <div className="modalOverlay" onClick={closeModal}>
+          <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={selectedSnack.imageUrl}
+              alt={selectedSnack.name}
+              style={{
+                width: "100%",
+                borderRadius: "8px",
+                marginBottom: "1rem",
+              }}
+            />
+            <h3>{selectedSnack.name}</h3>
+            <p>{selectedSnack.description}</p>
+            <p>Цена: {selectedSnack.price} ₽</p>
+
+            <label>
+              Количество:
+              <input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                style={{ marginLeft: "0.5rem", width: "60px" }}
+              />
+            </label>
+
+            <div className="modalButtons" style={{ marginTop: "1rem" }}>
+              <button onClick={handleAddToCart}>Добавить в корзину</button>
+              <button onClick={closeModal} style={{ marginLeft: "1rem" }}>
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

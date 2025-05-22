@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useCart } from "@/app/context/CartContext"; // импортируем хук для корзины
 import "./Menu.css";
 
 interface MenuItem {
@@ -52,12 +53,54 @@ const menuItems: MenuItem[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1617191510540-3f8d40d97a74?auto=format&fit=crop&w=800&q=80",
   },
+  {
+    id: 6,
+    name: "Хинкали",
+    description: "Грузинские хинкали с пряным мясным фаршем",
+    price: 390,
+    imageUrl:
+      "https://images.unsplash.com/photo-1617196037254-3c622fa89738?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 7,
+    name: "Суп харчо",
+    description: "Острый суп с говядиной, рисом и зеленью",
+    price: 320,
+    imageUrl:
+      "https://images.unsplash.com/photo-1633339141105-6e8cbe46549f?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 8,
+    name: "Чебурек",
+    description: "Жареный чебурек с сочной начинкой из мяса",
+    price: 180,
+    imageUrl:
+      "https://images.unsplash.com/photo-1662371982871-688f7c038d77?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 9,
+    name: "Кебаб",
+    description: "Кебаб из курицы с овощами и специями",
+    price: 410,
+    imageUrl:
+      "https://images.unsplash.com/photo-1603398738370-f57b73a83399?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 10,
+    name: "Чахохбили",
+    description: "Курица тушеная с луком, помидорами и специями",
+    price: 370,
+    imageUrl:
+      "https://images.unsplash.com/photo-1598514982322-51e5d26dd553?auto=format&fit=crop&w=800&q=80",
+  },
 ];
 
 const Menu: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useCart(); // достаем функцию добавления в корзину из контекста
 
   const openModal = (item: MenuItem) => {
     setSelectedItem(item);
@@ -70,9 +113,9 @@ const Menu: React.FC = () => {
     setSelectedItem(null);
   };
 
-  const addToCart = () => {
-    if (selectedItem) {
-      alert(`Добавлено в корзину: ${quantity} шт. "${selectedItem.name}"`);
+  const handleAddToCart = () => {
+    if (selectedItem && quantity > 0) {
+      addToCart(selectedItem, quantity);
       closeModal();
     }
   };
@@ -107,6 +150,15 @@ const Menu: React.FC = () => {
       {isModalOpen && selectedItem && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={selectedItem.imageUrl}
+              alt={selectedItem.name}
+              style={{
+                width: "100%",
+                borderRadius: "8px",
+                marginBottom: "1rem",
+              }}
+            />
             <h3>{selectedItem.name}</h3>
             <p>{selectedItem.description}</p>
             <p>Цена: {selectedItem.price} ₽</p>
@@ -118,12 +170,15 @@ const Menu: React.FC = () => {
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
+                style={{ marginLeft: "0.5rem", width: "60px" }}
               />
             </label>
 
-            <div className="modalButtons">
-              <button onClick={addToCart}>Добавить в корзину</button>
-              <button onClick={closeModal}>Отмена</button>
+            <div className="modalButtons" style={{ marginTop: "1rem" }}>
+              <button onClick={handleAddToCart}>Добавить в корзину</button>
+              <button onClick={closeModal} style={{ marginLeft: "1rem" }}>
+                Отмена
+              </button>
             </div>
           </div>
         </div>

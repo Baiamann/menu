@@ -12,18 +12,22 @@ export interface MenuItem {
 }
 
 // Тип элемента в корзине
-export interface CartItem extends MenuItem {
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
   quantity: number;
+  imageUrl: string;
+  description: string;
 }
 
 // Тип данных для контекста
 interface CartContextType {
-  cart: CartItem[];
-  addToCart: (item: MenuItem, quantity: number) => void;
+  items: CartItem[];
+  addToCart: (item: Omit<CartItem, 'quantity'>, quantity: number) => void;
   removeFromCart: (id: number) => void;
-  clearCart: () => void;
-  getTotalItems: () => number;
-  getTotalPrice: () => number;
+  updateQuantity: (id: number, quantity: number) => void;
+  total: number;
 }
 
 // Создание контекста
@@ -32,64 +36,52 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 // Хук для доступа к корзине
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart должен использоваться внутри CartProvider");
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 };
 
 // Провайдер корзины
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    if (typeof window !== 'undefined') {
-      const savedCart = localStorage.getItem('cart');
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-    return [];
-  });
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [items, setItems] = useState<CartItem[]>([]);
 
-  const addToCart = (item: MenuItem, quantity: number) => {
-    const existing = cart.find((i) => i.id === item.id);
-    let newCart;
-    if (existing) {
-      newCart = cart.map((i) =>
-        i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
-      );
-    } else {
-      newCart = [...cart, { ...item, quantity }];
-    }
-    setCart(newCart);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+  const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number) => {
+    setItems(prevItems => {
+      const existingItem = prevItems.find(i => i.id === item.id);
+      if (existingItem) {
+        return prevItems.map(i =>
+          i.id === item.id
+            ? { ...i, quantity: i.quantity + quantity }
+            : i
+        );
+      }
+      return [...prevItems, { ...item, quantity }];
+    });
   };
 
   const removeFromCart = (id: number) => {
-    const newCart = cart.filter((item) => item.id !== id);
-    setCart(newCart);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    setItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
-  const clearCart = () => {
-    setCart([]);
-    localStorage.removeItem('cart');
+  const updateQuantity = (id: number, quantity: number) => {
+    setItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
   };
 
-  const getTotalItems = () => {
-    return cart.reduce((sum, item) => sum + item.quantity, 0);
-  };
-
-  const getTotalPrice = () => {
-    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  };
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <CartContext.Provider
       value={{
-        cart,
+        items,
         addToCart,
         removeFromCart,
-        clearCart,
-        getTotalItems,
-        getTotalPrice,
+        updateQuantity,
+        total,
       }}
     >
       {children}

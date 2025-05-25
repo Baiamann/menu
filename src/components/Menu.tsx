@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCart } from "@/app/context/CartContext"; // импортируем хук для корзины
+import { useCart } from "@/app/context/CartContext";
 import "./Menu.css";
 
 interface MenuItem {
@@ -15,83 +15,66 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     id: 1,
-    name: "Плов по-узбекски",
-    description: "Традиционный узбекский плов с бараниной и желтой морковью",
-    price: 450,
-    imageUrl:
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80",
+    name: "Стейк Рибай",
+    description: "Нежный говяжий стейк с соусом из красного вина",
+    price: 2500,
+    imageUrl: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 2,
-    name: "Манты",
-    description: "Сочные манты с мясом и луком",
-    price: 380,
-    imageUrl:
-      "https://images.unsplash.com/photo-1562967916-eb82221dfb29?auto=format&fit=crop&w=800&q=80",
+    name: "Паста Карбонара",
+    description: "Спагетти с беконом, яйцом и пармезаном",
+    price: 1200,
+    imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 3,
-    name: "Шашлык",
-    description: "Шашлык из баранины на углях",
-    price: 520,
-    imageUrl:
-      "https://images.unsplash.com/photo-1543352634-68f0a8e6c02b?auto=format&fit=crop&w=800&q=80",
+    name: "Салат Цезарь",
+    description: "Салат с курицей, крутонами и соусом цезарь",
+    price: 800,
+    imageUrl: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 4,
-    name: "Лагман",
-    description: "Домашний лагман с говядиной и овощами",
-    price: 400,
-    imageUrl:
-      "https://images.unsplash.com/photo-1605478020978-041e49b53817?auto=format&fit=crop&w=800&q=80",
+    name: "Бургер Классический",
+    description: "Сочный бургер с говяжьей котлетой и овощами",
+    price: 650,
+    imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 5,
-    name: "Самса",
-    description: "Сочная самса из тандыра с мясом и луком",
-    price: 150,
-    imageUrl:
-      "https://images.unsplash.com/photo-1617191510540-3f8d40d97a74?auto=format&fit=crop&w=800&q=80",
+    name: "Пицца Маргарита",
+    description: "Классическая пицца с томатами и моцареллой",
+    price: 750,
+    imageUrl: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 6,
-    name: "Хинкали",
-    description: "Грузинские хинкали с пряным мясным фаршем",
-    price: 390,
-    imageUrl:
-      "https://images.unsplash.com/photo-1617196037254-3c622fa89738?auto=format&fit=crop&w=800&q=80",
+    name: "Ризотто с грибами",
+    description: "Кремовое ризотто с белыми грибами",
+    price: 850,
+    imageUrl: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 7,
-    name: "Суп харчо",
-    description: "Острый суп с говядиной, рисом и зеленью",
-    price: 320,
-    imageUrl:
-      "https://images.unsplash.com/photo-1633339141105-6e8cbe46549f?auto=format&fit=crop&w=800&q=80",
+    name: "Лосось на гриле",
+    description: "Филе лосося с овощами и лимоном",
+    price: 1800,
+    imageUrl: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 8,
-    name: "Чебурек",
-    description: "Жареный чебурек с сочной начинкой из мяса",
-    price: 180,
-    imageUrl:
-      "https://images.unsplash.com/photo-1662371982871-688f7c038d77?auto=format&fit=crop&w=800&q=80",
+    name: "Куриное карри",
+    description: "Острое карри с курицей и рисом",
+    price: 950,
+    imageUrl: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 9,
-    name: "Кебаб",
-    description: "Кебаб из курицы с овощами и специями",
-    price: 410,
-    imageUrl:
-      "https://images.unsplash.com/photo-1603398738370-f57b73a83399?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 10,
-    name: "Чахохбили",
-    description: "Курица тушеная с луком, помидорами и специями",
-    price: 370,
-    imageUrl:
-      "https://images.unsplash.com/photo-1598514982322-51e5d26dd553?auto=format&fit=crop&w=800&q=80",
+    name: "Равиоли с трюфелем",
+    description: "Домашние равиоли с трюфельным соусом",
+    price: 1200,
+    imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
   },
 ];
 
@@ -100,7 +83,7 @@ const Menu: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [quantity, setQuantity] = useState(1);
 
-  const { addToCart } = useCart(); // достаем функцию добавления в корзину из контекста
+  const { addToCart } = useCart();
 
   const openModal = (item: MenuItem) => {
     setSelectedItem(item);

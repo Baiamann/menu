@@ -2,13 +2,26 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #fff5f5;
+  font-family: 'Playfair Display', serif;
 }
 
 .menu-title {
   text-align: center;
+  margin-bottom: 1rem;
+  color: #2c1810;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.menu-subtitle {
+  text-align: center;
   margin-bottom: 2rem;
-  color: #333;
-  font-size: 2rem;
+  color: #666;
+  font-size: 1.2rem;
+  font-style: italic;
 }
 
 .menu-grid {
@@ -24,10 +37,12 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   cursor: pointer;
+  border: 1px solid #e2e8f0;
 }
 
 .menu-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
 .menu-card img {
@@ -38,27 +53,35 @@
 }
 
 .menu-card-content {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .menu-card-title {
   margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.25rem;
+  color: #2c1810;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .menu-card-description {
   color: #666;
   margin: 0 0 1rem 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.menu-card-price {
-  color: #2c5282;
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.price {
+  color: #c53030;
   font-weight: bold;
-  font-size: 1.1rem;
-  margin: 0;
+  font-size: 1.2rem;
 }
 
 .modalOverlay {
@@ -82,6 +105,7 @@
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  font-family: 'Playfair Display', serif;
 }
 
 .modalContent img {
@@ -90,19 +114,21 @@
   object-fit: cover;
   object-position: center;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .modalContent h3 {
-  margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.5rem;
+  margin: 0 0 0.75rem 0;
+  color: #2c1810;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .modalContent p {
   color: #666;
-  margin: 0 0 1rem 0;
-  line-height: 1.4;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .modalButtons {
@@ -117,16 +143,17 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .modalButtons button:first-child {
-  background-color: #2c5282;
+  background-color: #c53030;
   color: white;
 }
 
 .modalButtons button:first-child:hover {
-  background-color: #2b6cb0;
+  background-color: #9b2c2c;
 }
 
 .modalButtons button:last-child {
@@ -141,13 +168,18 @@
 /* Адаптив */
 @media (max-width: 600px) {
   .menu-title {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
   }
-  .menu-card-price {
-    font-size: 1.1rem;
+  .menu-subtitle {
+    font-size: 1rem;
   }
   .menu-grid {
     grid-template-columns: 1fr;
   }
-}
+  .modalContent {
+    padding: 1.5rem;
+  }
+  .modalContent h3 {
+    font-size: 1.5rem;
+  }
+} 

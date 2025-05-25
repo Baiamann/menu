@@ -67,7 +67,7 @@ const Modal: React.FC<ModalProps> = ({
               <span className="quantity-value">{quantity}</span>
               <button onClick={handleIncrement} className="quantity-btn">
                 <i className="fas fa-plus"></i>
-              </button>
+        </button>
             </div>
           </div>
           
@@ -82,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({
           >
             <i className="fas fa-shopping-cart"></i>
             Добавить в корзину
-          </button>
+        </button>
         </div>
       </div>
     </div>

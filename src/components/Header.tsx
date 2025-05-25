@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link href="/">Ресторан</Link>
+          <Link href="/">Gourmet Haven</Link>
         </div>
         <nav>
           <ul className="navList">
@@ -26,7 +26,9 @@ const Header: React.FC = () => {
             <li className="navItem">
               <Link href="/corzina" className="cart-link">
                 <i className="fas fa-shopping-cart"></i>
-                {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+                {cartCount > 0 && (
+                  <span className="cart-count">{cartCount}</span>
+                )}
               </Link>
             </li>
           </ul>

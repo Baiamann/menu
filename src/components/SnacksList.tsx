@@ -16,40 +16,63 @@ const SnacksList = () => {
       name: "Картофель фри",
       description: "Хрустящий картофель с соусом",
       price: 250,
-      imageUrl:
-        "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 2,
       name: "Начос",
       description: "Чипсы с сыром, перцем и соусом",
       price: 350,
-      imageUrl:
-        "https://images.unsplash.com/photo-1582169296194-d4d644c48081?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1582169296194-d4d644c48081?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 3,
       name: "Крылышки",
       description: "Куриные крылышки в соусе барбекю",
       price: 450,
-      imageUrl:
-        "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 4,
       name: "Сырные палочки",
       description: "Хрустящие палочки с моцареллой",
       price: 300,
-      imageUrl:
-        "https://images.unsplash.com/photo-1562967915-92ae0c320a1c?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1562967915-92ae0c320a1c?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 5,
       name: "Кальмары",
       description: "Жареные кальмары с соусом",
       price: 400,
-      imageUrl:
-        "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 6,
+      name: "Брускетта",
+      description: "Тосты с томатами и базиликом",
+      price: 280,
+      imageUrl: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 7,
+      name: "Оливки",
+      description: "Ассорти из маринованных оливок",
+      price: 320,
+      imageUrl: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 8,
+      name: "Гренки",
+      description: "Хрустящие гренки с чесноком",
+      price: 200,
+      imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e505484ba?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 9,
+      name: "Мидии",
+      description: "Мидии в белом вине",
+      price: 550,
+      imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=80",
     },
   ];
 

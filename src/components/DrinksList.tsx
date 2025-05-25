@@ -16,40 +16,63 @@ const DrinksList = () => {
       name: "Мохито",
       description: "Освежающий коктейль с мятой и лаймом",
       price: 500,
-      imageUrl:
-        "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 2,
       name: "Апероль Шприц",
       description: "Классический итальянский аперитив",
       price: 600,
-      imageUrl:
-        "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 3,
       name: "Красное вино",
       description: "Бордо, Франция",
       price: 800,
-      imageUrl:
-        "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 4,
       name: "Лимонад",
       description: "Домашний лимонад с апельсином и мятой",
       price: 350,
-      imageUrl:
-        "https://images.unsplash.com/photo-1584270354949-3c60738f6f4c?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1584270354949-3c60738f6f4c?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: 5,
       name: "Айран",
       description: "Прохладительный кисломолочный напиток",
       price: 250,
-      imageUrl:
-        "https://images.unsplash.com/photo-1607344643404-604bc1b60c16?auto=format&fit=crop&w=500&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1607344643404-604bc1b60c16?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 6,
+      name: "Капучино",
+      description: "Классический итальянский кофе",
+      price: 300,
+      imageUrl: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 7,
+      name: "Зеленый чай",
+      description: "Свежезаваренный японский чай",
+      price: 200,
+      imageUrl: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 8,
+      name: "Смузи",
+      description: "Фруктовый смузи с ягодами",
+      price: 400,
+      imageUrl: "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: 9,
+      name: "Пиво",
+      description: "Свежее разливное пиво",
+      price: 350,
+      imageUrl: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&auto=format&fit=crop&q=80",
     },
   ];
 

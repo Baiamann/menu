@@ -16,7 +16,7 @@ const CorzinaPage: React.FC = () => {
     address: "",
     city: "",
     postalCode: "",
-    notes: ""
+    notes: "",
   });
 
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -35,17 +35,24 @@ const CorzinaPage: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.address) {
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.phone ||
+      !formData.address
+    ) {
       alert("Пожалуйста, заполните все обязательные поля.");
       return;
     }
@@ -60,15 +67,25 @@ const CorzinaPage: React.FC = () => {
           <p>Мы свяжемся с вами в ближайшее время для подтверждения.</p>
           <div className="order-details">
             <h3>Детали заказа:</h3>
-            <p><strong>Имя:</strong> {formData.firstName} {formData.lastName}</p>
-            <p><strong>Телефон:</strong> {formData.phone}</p>
-            <p><strong>Адрес:</strong> {formData.address}</p>
-            <p><strong>Город:</strong> {formData.city}</p>
-            <p><strong>Сумма заказа:</strong> {totalPrice} ₽</p>
+            <p>
+              <strong>Имя:</strong> {formData.firstName} {formData.lastName}
+            </p>
+            <p>
+              <strong>Телефон:</strong> {formData.phone}
+            </p>
+            <p>
+              <strong>Адрес:</strong> {formData.address}
+            </p>
+            <p>
+              <strong>Город:</strong> {formData.city}
+            </p>
+            <p>
+              <strong>Сумма заказа:</strong> {totalPrice} ₽
+            </p>
           </div>
           <Link href="/" className="back-to-home">
-          Вернуться на главную
-        </Link>
+            Вернуться на главную
+          </Link>
         </div>
       </div>
     );
@@ -83,10 +100,10 @@ const CorzinaPage: React.FC = () => {
           <div className="empty-cart">
             <p>Ваша корзина пуста</p>
             <Link href="/" className="continue-shopping">
-            Перейти в меню
-          </Link>
+              Перейти в меню
+            </Link>
           </div>
-      ) : (
+        ) : (
           <div className="cart-layout">
             <div className="cart-items-section">
               <div className="cart-items">
@@ -99,35 +116,41 @@ const CorzinaPage: React.FC = () => {
                       <h3 className="item-name">{item.name}</h3>
                       <p className="item-description">{item.description}</p>
                       <div className="item-controls">
-                    <div className="quantity-controls">
-                      <button
-                        onClick={() => handleQuantityChange(item, item.quantity - 1)}
-                        className="quantity-btn"
-                      >
-                        -
-                      </button>
-                      <span className="quantity">{item.quantity}</span>
-                      <button
-                        onClick={() => handleQuantityChange(item, item.quantity + 1)}
-                        className="quantity-btn"
-                      >
-                        +
-                      </button>
-                    </div>
+                        <div className="quantity-controls">
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item, item.quantity - 1)
+                            }
+                            className="quantity-btn"
+                          >
+                            -
+                          </button>
+                          <span className="quantity">{item.quantity}</span>
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item, item.quantity + 1)
+                            }
+                            className="quantity-btn"
+                          >
+                            +
+                          </button>
+                        </div>
                         <div className="price-controls">
                           <span className="item-price">{item.price} ₽</span>
-                          <span className="item-total">{item.price * item.quantity} ₽</span>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                </div>
+                          <span className="item-total">
+                            {item.price * item.quantity} ₽
+                          </span>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="remove-btn"
+                          >
+                            Удалить
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-            ))}
+                ))}
               </div>
             </div>
 
@@ -148,8 +171,8 @@ const CorzinaPage: React.FC = () => {
                 </div>
               </div>
 
-          <form onSubmit={handleOrder} className="order-form">
-            <h3>Оформление заказа</h3>
+              <form onSubmit={handleOrder} className="order-form">
+                <h3>Оформление заказа</h3>
 
                 <div className="form-row">
                   <div className="form-group">
@@ -165,14 +188,14 @@ const CorzinaPage: React.FC = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="lastName">Фамилия *</label>
-            <input
+                    <input
                       id="lastName"
                       name="lastName"
-              type="text"
+                      type="text"
                       value={formData.lastName}
                       onChange={handleInputChange}
-              required
-            />
+                      required
+                    />
                   </div>
                 </div>
 
@@ -189,27 +212,27 @@ const CorzinaPage: React.FC = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Телефон *</label>
-            <input
-              id="phone"
+                    <input
+                      id="phone"
                       name="phone"
-              type="tel"
+                      type="tel"
                       value={formData.phone}
                       onChange={handleInputChange}
-              required
-            />
+                      required
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="address">Адрес доставки *</label>
                   <input
-              id="address"
+                    id="address"
                     name="address"
                     type="text"
                     value={formData.address}
                     onChange={handleInputChange}
-              required
-            />
+                    required
+                  />
                 </div>
 
                 <div className="form-row">
@@ -249,10 +272,10 @@ const CorzinaPage: React.FC = () => {
                 <button type="submit" className="submit-order">
                   Оформить заказ
                 </button>
-          </form>
+              </form>
             </div>
           </div>
-      )}
+        )}
       </div>
     </div>
   );

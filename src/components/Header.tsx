@@ -7,7 +7,8 @@ import { useCart } from "@/app/context/CartContext";
 
 const Header: React.FC = () => {
   const { items } = useCart();
-  const cartCount = items.reduce((total, item) => total + item.quantity, 0);
+  const cartCount =
+    items?.reduce((total, item) => total + item.quantity, 0) ?? 0;
 
   return (
     <header className="header">
@@ -25,7 +26,6 @@ const Header: React.FC = () => {
             </li>
             <li className="navItem">
               <Link href="/corzina" className="cart-link">
-                <i className="fas fa-shopping-cart"></i>
                 {cartCount > 0 && (
                   <span className="cart-count">{cartCount}</span>
                 )}

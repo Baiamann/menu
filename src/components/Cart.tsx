@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useCart } from '../app/context/CartContext';
-import Link from 'next/link';
-import './Cart.css';
+import React, { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
+import Link from "next/link";
+import Image from "next/image";
+import "./Cart.css";
 
 interface CartItem {
   id: number;
@@ -25,7 +26,7 @@ const Cart = () => {
     address: "",
     city: "",
     postalCode: "",
-    notes: ""
+    notes: "",
   });
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
@@ -36,21 +37,38 @@ const Cart = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.address) {
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.phone ||
+      !formData.address
+    ) {
       alert("Пожалуйста, заполните все обязательные поля.");
       return;
     }
     setOrderPlaced(true);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      notes: "",
+    });
   };
 
   if (orderPlaced) {
@@ -61,14 +79,24 @@ const Cart = () => {
           <p>Мы свяжемся с вами в ближайшее время для подтверждения.</p>
           <div className="order-details">
             <h3>Детали заказа:</h3>
-            <p><strong>Имя:</strong> {formData.firstName} {formData.lastName}</p>
-            <p><strong>Телефон:</strong> {formData.phone}</p>
-            <p><strong>Адрес:</strong> {formData.address}</p>
-            <p><strong>Город:</strong> {formData.city}</p>
-            <p><strong>Сумма заказа:</strong> {total} ₽</p>
+            <p>
+              <strong>Имя:</strong> {formData.firstName} {formData.lastName}
+            </p>
+            <p>
+              <strong>Телефон:</strong> {formData.phone}
+            </p>
+            <p>
+              <strong>Адрес:</strong> {formData.address}
+            </p>
+            <p>
+              <strong>Город:</strong> {formData.city}
+            </p>
+            <p>
+              <strong>Сумма заказа:</strong> {total} ₽
+            </p>
           </div>
-          <Link href="/" className="back-to-home">
-            Вернуться на главную
+          <Link href="/">
+            <span className="back-to-home">Вернуться на главную</span>
           </Link>
         </div>
       </div>
@@ -79,75 +107,86 @@ const Cart = () => {
     <div className="cart-container">
       <div className="cart-content">
         <h2 className="cart-title">Корзина</h2>
-        
-        {items.length === 0 ? (
+
+        {items?.length === 0 ? (
           <div className="empty-cart">
             <p>Ваша корзина пуста</p>
-            <Link href="/" className="continue-shopping">
-              Перейти в меню
+            <Link href="/">
+              <span className="continue-shopping">Перейти в меню</span>
             </Link>
           </div>
         ) : (
           <div className="cart-layout">
             <div className="cart-items-section">
-            <div className="cart-items">
-              {items.map((item: CartItem) => (
-                <div key={item.id} className="cart-item">
+              <div className="cart-items">
+                {items.map((item: CartItem) => (
+                  <div key={item.id} className="cart-item">
                     <div className="item-image">
-                    <img src={item.imageUrl} alt={item.name} />
-                  </div>
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.name}
+                        width={100}
+                        height={100}
+                      />
+                    </div>
                     <div className="item-details">
                       <h3 className="item-name">{item.name}</h3>
                       <p className="item-description">{item.description}</p>
                       <div className="item-controls">
                         <div className="quantity-controls">
-                      <button 
-                        onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                        className="quantity-btn"
-                      >
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity - 1)
+                            }
+                            className="quantity-btn"
+                          >
                             -
-                      </button>
+                          </button>
                           <span className="quantity">{item.quantity}</span>
-                      <button 
-                        onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                        className="quantity-btn"
-                      >
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity + 1)
+                            }
+                            className="quantity-btn"
+                          >
                             +
-                      </button>
-                    </div>
+                          </button>
+                        </div>
                         <div className="price-controls">
                           <span className="item-price">{item.price} ₽</span>
-                          <span className="item-total">{item.price * item.quantity} ₽</span>
-                    <button 
+                          <span className="item-total">
+                            {item.price * item.quantity} ₽
+                          </span>
+                          <button
                             onClick={() => removeFromCart(item.id)}
-                      className="remove-btn"
-                    >
+                            className="remove-btn"
+                          >
                             Удалить
-                    </button>
+                          </button>
                         </div>
                       </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               </div>
             </div>
 
             <div className="order-section">
               <div className="order-summary">
                 <h3>Сводка заказа</h3>
-              <div className="summary-row">
-                <span>Подытог:</span>
-                <span>{total} ₽</span>
+                <div className="summary-row">
+                  <span>Подытог:</span>
+                  <span>{total} ₽</span>
+                </div>
+                <div className="summary-row">
+                  <span>Доставка:</span>
+                  <span>Бесплатно</span>
+                </div>
+                <div className="summary-row total">
+                  <span>Итого:</span>
+                  <span>{total} ₽</span>
+                </div>
               </div>
-              <div className="summary-row">
-                <span>Доставка:</span>
-                <span>Бесплатно</span>
-              </div>
-              <div className="summary-row total">
-                <span>Итого:</span>
-                <span>{total} ₽</span>
-              </div>
-            </div>
 
               <form onSubmit={handleOrder} className="order-form">
                 <h3>Оформление заказа</h3>
@@ -248,8 +287,8 @@ const Cart = () => {
                 </div>
 
                 <button type="submit" className="submit-order">
-                Оформить заказ
-              </button>
+                  Оформить заказ
+                </button>
               </form>
             </div>
           </div>
@@ -259,4 +298,4 @@ const Cart = () => {
   );
 };
 
-export default Cart; 
+export default Cart;

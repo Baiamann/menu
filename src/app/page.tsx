@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import SpecialOffers from "@/components/SpecialOffers";
-import MenuList from "@/components/MenuList";
+
 import DrinksList from "@/components/DrinksList";
 import DessertsList from "@/components/DessertsList";
 import SnacksList from "@/components/SnacksList";

@@ -1,9 +1,14 @@
 import React from "react";
-import "//CategorySelector.css";
+import "./CategorySelector.css";
 
 const categories = ["Основное", "Десерты", "Напитки"];
 
-export default function CategorySelector({ category, setCategory }) {
+interface Props {
+  category: string;
+  setCategory: (category: string) => void;
+}
+
+export default function CategorySelector({ category, setCategory }: Props) {
   return (
     <div className="container">
       {categories.map((cat) => {

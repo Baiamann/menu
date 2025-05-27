@@ -58,14 +58,14 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #fff5f5;
+  background-color: #f0f9ff;
   font-family: 'Playfair Display', serif;
 }
 
 .menu-title {
   text-align: center;
   margin-bottom: 1rem;
-  color: #2c1810;
+  color: #1e40af;
   font-size: 2.5rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -75,7 +75,7 @@
 .menu-subtitle {
   text-align: center;
   margin-bottom: 2rem;
-  color: #666;
+  color: #64748b;
   font-size: 1.2rem;
   font-style: italic;
 }
@@ -101,11 +101,22 @@
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-.menu-card img {
+.menu-card-image-container {
+  position: relative;
   width: 100%;
   height: 200px;
+  overflow: hidden;
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover .menu-card-image {
+  transform: scale(1.05);
 }
 
 .menu-card-content {
@@ -114,13 +125,13 @@
 
 .menu-card-title {
   margin: 0 0 0.5rem 0;
-  color: #2c1810;
+  color: #1e40af;
   font-size: 1.4rem;
   font-weight: 600;
 }
 
 .menu-card-description {
-  color: #666;
+  color: #64748b;
   margin: 0 0 1rem 0;
   font-size: 1rem;
   line-height: 1.5;
@@ -135,7 +146,7 @@
 }
 
 .price {
-  color: #c53030;
+  color: #1e40af;
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -164,24 +175,24 @@
   font-family: 'Playfair Display', serif;
 }
 
-.modalContent img {
+.modal-image-container {
+  position: relative;
   width: 100%;
   height: 300px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
   margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .modalContent h3 {
   margin: 0 0 0.75rem 0;
-  color: #2c1810;
+  color: #1e40af;
   font-size: 1.8rem;
   font-weight: 600;
 }
 
 .modalContent p {
-  color: #666;
+  color: #64748b;
   margin: 0 0 1.5rem 0;
   line-height: 1.6;
   font-family: 'Open Sans', sans-serif;
@@ -204,12 +215,12 @@
 }
 
 .modalButtons button:first-child {
-  background-color: #c53030;
+  background-color: #1e40af;
   color: white;
 }
 
 .modalButtons button:first-child:hover {
-  background-color: #9b2c2c;
+  background-color: #1e3a8a;
 }
 
 .modalButtons button:last-child {

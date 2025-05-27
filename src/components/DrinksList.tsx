@@ -2,94 +2,114 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
+import Image from "next/image";
+import Rating from "./Rating";
 import "./Drinks.css";
 
-const DrinksList = () => {
+interface DrinkItem {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  rating: number;
+}
+
+const DrinksList: React.FC = () => {
   const { addToCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDrink, setSelectedDrink] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<DrinkItem | null>(null);
   const [quantity, setQuantity] = useState(1);
 
-  const drinks = [
+  const drinks: DrinkItem[] = [
     {
       id: 1,
-      name: "Мохито",
-      description: "Освежающий коктейль с мятой и лаймом",
-      price: 500,
-      imageUrl: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=800&auto=format&fit=crop&q=80",
+      name: "Эспрессо",
+      description: "Крепкий итальянский кофе",
+      price: 200,
+      imageUrl: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8,
     },
     {
       id: 2,
-      name: "Апероль Шприц",
-      description: "Классический итальянский аперитив",
-      price: 600,
-      imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&auto=format&fit=crop&q=80",
+      name: "Капучино",
+      description: "Кофе с молочной пенкой",
+      price: 250,
+      imageUrl: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9,
     },
     {
       id: 3,
-      name: "Красное вино",
-      description: "Бордо, Франция",
-      price: 800,
-      imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&auto=format&fit=crop&q=80",
+      name: "Лимончелло",
+      description: "Итальянский ликер из лимонов",
+      price: 350,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.5,
     },
     {
       id: 4,
-      name: "Лимонад",
-      description: "Домашний лимонад с апельсином и мятой",
-      price: 350,
-      imageUrl: "https://images.unsplash.com/photo-1584270354949-3c60738f6f4c?w=800&auto=format&fit=crop&q=80",
+      name: "Апероль Спритц",
+      description: "Коктейль с аперолем и просекко",
+      price: 450,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.7,
     },
     {
       id: 5,
-      name: "Айран",
-      description: "Прохладительный кисломолочный напиток",
-      price: 250,
-      imageUrl: "https://images.unsplash.com/photo-1607344643404-604bc1b60c16?w=800&auto=format&fit=crop&q=80",
+      name: "Просекко",
+      description: "Итальянское игристое вино",
+      price: 600,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.6,
     },
     {
       id: 6,
-      name: "Капучино",
-      description: "Классический итальянский кофе",
-      price: 300,
-      imageUrl: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&auto=format&fit=crop&q=80",
+      name: "Кьянти",
+      description: "Тосканское красное вино",
+      price: 800,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8,
     },
     {
       id: 7,
-      name: "Зеленый чай",
-      description: "Свежезаваренный японский чай",
-      price: 200,
-      imageUrl: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=800&auto=format&fit=crop&q=80",
+      name: "Пинья Колада",
+      description: "Тропический коктейль с ромом",
+      price: 500,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9,
     },
     {
       id: 8,
-      name: "Смузи",
-      description: "Фруктовый смузи с ягодами",
-      price: 400,
-      imageUrl: "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=800&auto=format&fit=crop&q=80",
+      name: "Мохито",
+      description: "Освежающий коктейль с мятой",
+      price: 450,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.7,
     },
     {
       id: 9,
-      name: "Пиво",
-      description: "Свежее разливное пиво",
-      price: 350,
-      imageUrl: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&auto=format&fit=crop&q=80",
+      name: "Беллависта",
+      description: "Коктейль с джином и розовым вином",
+      price: 550,
+      imageUrl: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8,
     },
   ];
 
-  const openModal = (drink: any) => {
-    setSelectedDrink(drink);
+  const openModal = (item: DrinkItem) => {
+    setSelectedItem(item);
     setQuantity(1);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedDrink(null);
+    setSelectedItem(null);
   };
 
   const handleAddToCart = () => {
-    if (selectedDrink && quantity > 0) {
-      addToCart(selectedDrink, quantity);
+    if (selectedItem && quantity > 0) {
+      addToCart(selectedItem, quantity);
       closeModal();
     }
   };
@@ -97,34 +117,50 @@ const DrinksList = () => {
   return (
     <section className="menu">
       <h2 className="menu-title">Напитки</h2>
+      <p className="menu-subtitle">Итальянские напитки и коктейли</p>
       <div className="menu-grid">
-        {drinks.map((drink) => (
-          <div key={drink.id} className="menu-card" onClick={() => openModal(drink)}>
-            <img src={drink.imageUrl} alt={drink.name} />
+        {drinks.map((item) => (
+          <div key={item.id} className="menu-card" onClick={() => openModal(item)}>
+            <div className="menu-card-image-container">
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                width={320}
+                height={180}
+                className="menu-card-image"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="menu-card-content">
-              <h3 className="menu-card-title">{drink.name}</h3>
-              <p className="menu-card-description">{drink.description}</p>
-              <p className="menu-card-price">{drink.price} ₽</p>
+              <h3 className="menu-card-title">{item.name}</h3>
+              <p className="menu-card-description">{item.description}</p>
+              <div className="price-container">
+                <span className="price">{item.price} ₽</span>
+              </div>
+              <Rating value={item.rating} />
             </div>
           </div>
         ))}
       </div>
 
-      {isModalOpen && selectedDrink && (
+      {isModalOpen && selectedItem && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selectedDrink.imageUrl}
-              alt={selectedDrink.name}
-              style={{
-                width: "100%",
-                borderRadius: "8px",
-                marginBottom: "1rem",
-              }}
-            />
-            <h3>{selectedDrink.name}</h3>
-            <p>{selectedDrink.description}</p>
-            <p>Цена: {selectedDrink.price} ₽</p>
+            <div className="modal-image-container">
+              <Image
+                src={selectedItem.imageUrl}
+                alt={selectedItem.name}
+                width={500}
+                height={300}
+                style={{ objectFit: 'cover', borderRadius: '8px' }}
+              />
+            </div>
+            <h3>{selectedItem.name}</h3>
+            <p>{selectedItem.description}</p>
+            <div className="price-container">
+              <span className="price">{selectedItem.price} ₽</span>
+            </div>
+            <Rating value={selectedItem.rating} />
 
             <label>
               Количество:

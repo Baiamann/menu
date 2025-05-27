@@ -30,28 +30,40 @@
   transform: translateY(-5px);
 }
 
-.menu-card-image {
+.menu-card-image-container {
+  position: relative;
   width: 100%;
   height: 200px;
+  overflow: hidden;
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover .menu-card-image {
+  transform: scale(1.05);
 }
 
 .menu-card-content {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .menu-card-title {
   margin: 0 0 0.5rem 0;
   color: #333;
   font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .menu-card-description {
   color: #666;
   margin: 0 0 1rem 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .menu-card-price {
@@ -84,13 +96,13 @@
   overflow-y: auto;
 }
 
-.modalContent img {
+.modal-image-container {
+  position: relative;
   width: 100%;
   height: 300px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
   margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .modalContent h3 {
@@ -136,4 +148,18 @@
 
 .modalButtons button:last-child:hover {
   background-color: #cbd5e0;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .menu-card-price {
+    font-size: 1.1rem;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Link from "next/link";
 import Image from "next/image";
+import Rating from "./Rating";
 import "./Cart.css";
 
 interface CartItem {
@@ -13,7 +14,70 @@ interface CartItem {
   quantity: number;
   imageUrl: string;
   description: string;
+  rating: number;
 }
+
+const OrderSuccess = ({ orderDetails, onClose }: { orderDetails: any, onClose: () => void }) => {
+  const deliveryTime = new Date();
+  deliveryTime.setMinutes(deliveryTime.getMinutes() + 30);
+
+  return (
+    <div className="order-success">
+      <div className="success-content">
+        <div className="success-icon">✓</div>
+        <h2>Заказ успешно оформлен!</h2>
+        <div className="delivery-time">
+          <p>Ожидаемое время доставки:</p>
+          <p className="delivery-time-value">{deliveryTime.toLocaleTimeString()}</p>
+          <p className="delivery-note">(примерно через 30 минут)</p>
+        </div>
+        <div className="order-details">
+          <h3>Детали заказа</h3>
+          <div className="detail-row">
+            <span className="detail-label">Имя:</span>
+            <span className="detail-value">{orderDetails.name}</span>
+          </div>
+          <div className="detail-row">
+            <span className="detail-label">Телефон:</span>
+            <span className="detail-value">{orderDetails.phone}</span>
+          </div>
+          <div className="detail-row">
+            <span className="detail-label">Адрес:</span>
+            <span className="detail-value">{orderDetails.address}</span>
+          </div>
+          <div className="detail-row">
+            <span className="detail-label">Комментарий:</span>
+            <span className="detail-value">{orderDetails.comment || "Нет"}</span>
+          </div>
+          
+          <div className="order-items">
+            <h4>Ваш заказ:</h4>
+            {orderDetails.items.map((item: CartItem) => (
+              <div key={item.id} className="order-item">
+                <div className="order-item-details">
+                  <span className="order-item-name">{item.name} x {item.quantity}</span>
+                  <Rating value={item.rating} />
+                </div>
+                <span className="order-item-price">{item.price * item.quantity} ₽</span>
+              </div>
+            ))}
+            <div className="order-total">
+              <span>Итого:</span>
+              <span>{orderDetails.total} ₽</span>
+            </div>
+          </div>
+        </div>
+        <div className="delivery-info">
+          <p>Мы свяжемся с вами для подтверждения заказа</p>
+          <p>Спасибо за заказ! Приятного аппетита! 🍝</p>
+        </div>
+        <a href="/" className="back-to-home" onClick={onClose}>
+          Вернуться на главную
+        </a>
+      </div>
+    </div>
+  );
+};
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total } = useCart();
@@ -73,33 +137,14 @@ const Cart = () => {
 
   if (orderPlaced) {
     return (
-      <div className="order-success">
-        <div className="success-content">
-          <h2>Спасибо за заказ!</h2>
-          <p>Мы свяжемся с вами в ближайшее время для подтверждения.</p>
-          <div className="order-details">
-            <h3>Детали заказа:</h3>
-            <p>
-              <strong>Имя:</strong> {formData.firstName} {formData.lastName}
-            </p>
-            <p>
-              <strong>Телефон:</strong> {formData.phone}
-            </p>
-            <p>
-              <strong>Адрес:</strong> {formData.address}
-            </p>
-            <p>
-              <strong>Город:</strong> {formData.city}
-            </p>
-            <p>
-              <strong>Сумма заказа:</strong> {total} ₽
-            </p>
-          </div>
-          <Link href="/">
-            <span className="back-to-home">Вернуться на главную</span>
-          </Link>
-        </div>
-      </div>
+      <OrderSuccess orderDetails={{
+        name: `${formData.firstName} ${formData.lastName}`,
+        phone: formData.phone,
+        address: formData.address,
+        comment: formData.notes,
+        items: items,
+        total: total
+      }} onClose={() => setOrderPlaced(false)} />
     );
   }
 
@@ -119,7 +164,7 @@ const Cart = () => {
           <div className="cart-layout">
             <div className="cart-items-section">
               <div className="cart-items">
-                {items.map((item: CartItem) => (
+                {items.map((item) => (
                   <div key={item.id} className="cart-item">
                     <div className="item-image">
                       <Image
@@ -127,11 +172,15 @@ const Cart = () => {
                         alt={item.name}
                         width={100}
                         height={100}
+                        style={{ objectFit: 'cover' }}
                       />
                     </div>
                     <div className="item-details">
                       <h3 className="item-name">{item.name}</h3>
                       <p className="item-description">{item.description}</p>
+                      <div className="item-rating">
+                        <Rating value={item.rating} />
+                      </div>
                       <div className="item-controls">
                         <div className="quantity-controls">
                           <button
@@ -139,6 +188,7 @@ const Cart = () => {
                               handleQuantityChange(item.id, item.quantity - 1)
                             }
                             className="quantity-btn"
+                            disabled={item.quantity <= 1}
                           >
                             -
                           </button>

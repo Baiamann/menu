@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
+import Image from "next/image";
 import "./Menu.css";
 
 interface MenuItem {
@@ -15,66 +16,66 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     id: 1,
-    name: "Стейк Рибай",
-    description: "Нежный говяжий стейк с соусом из красного вина",
-    price: 2500,
-    imageUrl: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=800&auto=format&fit=crop&q=80",
+    name: "Лазанья Болоньезе",
+    description: "Классическая лазанья с соусом болоньезе и бешамель",
+    price: 1200,
+    imageUrl: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 2,
     name: "Паста Карбонара",
     description: "Спагетти с беконом, яйцом и пармезаном",
-    price: 1200,
-    imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
+    price: 950,
+    imageUrl: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 3,
-    name: "Салат Цезарь",
-    description: "Салат с курицей, крутонами и соусом цезарь",
-    price: 800,
-    imageUrl: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=800&auto=format&fit=crop&q=80",
+    name: "Ризотто с грибами",
+    description: "Кремовое ризотто с белыми грибами и пармезаном",
+    price: 850,
+    imageUrl: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 4,
-    name: "Бургер Классический",
-    description: "Сочный бургер с говяжьей котлетой и овощами",
-    price: 650,
-    imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop&q=80",
-  },
-  {
-    id: 5,
     name: "Пицца Маргарита",
     description: "Классическая пицца с томатами и моцареллой",
     price: 750,
     imageUrl: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&auto=format&fit=crop&q=80",
   },
   {
+    id: 5,
+    name: "Оссобуко",
+    description: "Тушеная телячья голень с овощами и ризотто",
+    price: 1500,
+    imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+  },
+  {
     id: 6,
-    name: "Ризотто с грибами",
-    description: "Кремовое ризотто с белыми грибами",
-    price: 850,
-    imageUrl: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&auto=format&fit=crop&q=80",
+    name: "Равиоли с трюфелем",
+    description: "Домашние равиоли с трюфельным соусом",
+    price: 1100,
+    imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 7,
-    name: "Лосось на гриле",
-    description: "Филе лосося с овощами и лимоном",
-    price: 1800,
-    imageUrl: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop&q=80",
+    name: "Суп Минестроне",
+    description: "Традиционный итальянский овощной суп",
+    price: 650,
+    imageUrl: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 8,
-    name: "Куриное карри",
-    description: "Острое карри с курицей и рисом",
-    price: 950,
-    imageUrl: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&auto=format&fit=crop&q=80",
+    name: "Сальтимбокка",
+    description: "Телятина с прошутто и шалфеем",
+    price: 1300,
+    imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
   },
   {
     id: 9,
-    name: "Равиоли с трюфелем",
-    description: "Домашние равиоли с трюфельным соусом",
-    price: 1200,
-    imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
+    name: "Феттучини Альфредо",
+    description: "Паста с соусом из сливок и пармезана",
+    price: 900,
+    imageUrl: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&auto=format&fit=crop&q=80",
   },
 ];
 
@@ -113,14 +114,16 @@ const Menu: React.FC = () => {
             className="menu-card"
             onClick={() => openModal(item)}
           >
-            <img
-              src={item.imageUrl}
-              alt={item.name}
-              className="menu-card-image"
-              loading="lazy"
-              width={320}
-              height={180}
-            />
+            <div className="menu-card-image-container">
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                width={320}
+                height={180}
+                className="menu-card-image"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="menu-card-content">
               <h3 className="menu-card-title">{item.name}</h3>
               <p className="menu-card-description">{item.description}</p>
@@ -133,15 +136,15 @@ const Menu: React.FC = () => {
       {isModalOpen && selectedItem && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selectedItem.imageUrl}
-              alt={selectedItem.name}
-              style={{
-                width: "100%",
-                borderRadius: "8px",
-                marginBottom: "1rem",
-              }}
-            />
+            <div className="modal-image-container">
+              <Image
+                src={selectedItem.imageUrl}
+                alt={selectedItem.name}
+                width={500}
+                height={300}
+                style={{ objectFit: 'cover', borderRadius: '8px' }}
+              />
+            </div>
             <h3>{selectedItem.name}</h3>
             <p>{selectedItem.description}</p>
             <p>Цена: {selectedItem.price} ₽</p>

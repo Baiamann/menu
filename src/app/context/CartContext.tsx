@@ -8,6 +8,7 @@ export interface MenuItem {
   description: string;
   price: number;
   imageUrl: string;
+  rating: number;
 }
 
 interface CartItem {
@@ -17,6 +18,7 @@ interface CartItem {
   quantity: number;
   imageUrl: string;
   description: string;
+  rating: number;
 }
 
 interface CartContextType {

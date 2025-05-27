@@ -7,8 +7,8 @@ import { CartProvider } from "@/app/context/CartContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gourmet Haven",
-  description: 'Меню ресторана "Gourmet Haven"',
+  title: "La Dolce Vita - Итальянский ресторан",
+  description: "Лучший итальянский ресторан в городе",
 };
 
 export default function RootLayout({

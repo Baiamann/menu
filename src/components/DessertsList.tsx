@@ -153,8 +153,8 @@ const DessertsList: React.FC = () => {
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
             <div className="modal-image-container">
               <Image
-                src={selectedItem.imageUrl}
-                alt={selectedItem.name}
+              src={selectedItem.imageUrl}
+              alt={selectedItem.name}
                 width={500}
                 height={300}
                 style={{ objectFit: 'cover', borderRadius: '8px' }}

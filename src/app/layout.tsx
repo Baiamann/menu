@@ -1,46 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import { CartProvider } from "@/app/context/CartContext";
+import { CartProvider } from "./context/CartContext"; // ⬅️ добавьте это
 
-const inter = Inter({ 
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"]
-});
-
-const playfair = Playfair_Display({ 
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"]
-});
-
-const cormorant = Cormorant_Garamond({ 
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"]
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "La Dolce Vita - Итальянский ресторан",
-  description: "Лучший итальянский ресторан в городе",
+  title: "Gourmet Haven",
+  description: "Ресторан Gourmet Haven - изысканная кухня и уютная атмосфера",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="ru" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        />
-      </head>
+    <html lang="ru">
       <body className={inter.className}>
-        <CartProvider>
+        <CartProvider> {/* ⬅️ оборачиваем все содержимое */}
           <Header />
-          <main style={{ paddingTop: "80px" }}>{children}</main>
+          {children}
         </CartProvider>
       </body>
     </html>

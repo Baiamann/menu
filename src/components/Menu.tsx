@@ -130,13 +130,13 @@ const Menu: React.FC = () => {
           >
             <div className="menu-card-image-container">
               <Image
-                src={item.imageUrl}
-                alt={item.name}
-                width={320}
-                height={180}
+              src={item.imageUrl}
+              alt={item.name}
+              width={320}
+              height={180}
                 className="menu-card-image"
                 style={{ objectFit: 'cover' }}
-              />
+            />
             </div>
             <div className="menu-card-content">
               <h3 className="menu-card-title">{item.name}</h3>
@@ -156,8 +156,8 @@ const Menu: React.FC = () => {
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
             <div className="modal-image-container">
               <Image
-                src={selectedItem.imageUrl}
-                alt={selectedItem.name}
+              src={selectedItem.imageUrl}
+              alt={selectedItem.name}
                 width={500}
                 height={300}
                 style={{ objectFit: 'cover', borderRadius: '8px' }}

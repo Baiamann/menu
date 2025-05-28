@@ -1,0 +1,233 @@
+.booking-page {
+    min-height: calc(100vh - 80px);
+    background: #f5f5f5;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  .booking-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .booking-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+  
+  .booking-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 184, 148, 0.2);
+  }
+  
+  .form-group input.error,
+  .form-group select.error {
+    border-color: #ff5252;
+    background-color: #fff8f8;
+  }
+  
+  .form-group input.error:focus,
+  .form-group select.error:focus {
+    box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.2);
+  }
+  
+  .error-message {
+    color: #ff5252;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: block;
+  }
+  
+  .submit-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .submit-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .success-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .success-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    background: #e8f5e9;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .success-modal h2 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .booking-details {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .booking-details p {
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .booking-details strong {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .success-message {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .home-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .home-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .booking-container {
+      padding: 1rem;
+    }
+  
+    .booking-container h1 {
+      font-size: 2rem;
+    }
+  
+    .booking-form {
+      padding: 1.5rem;
+    }
+  
+    .success-modal {
+      padding: 1.5rem;
+    }
+  
+    .success-modal h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  /* Input Placeholder Styles */
+  .form-group input::placeholder {
+    color: #b2bec3;
+    font-size: 1.1rem;
+  }
+  
+  /* Select Styles */
+  .form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+    padding-right: 50px;
+  }
+  
+  /* Required Field Indicator */
+  .form-group label::after {
+    content: " *";
+    color: var(--primary-color);
+  }

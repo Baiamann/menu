@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import "./Header.css";
 import { useCart } from "../app/context/CartContext";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
   const { items } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -27,10 +29,24 @@ const Header: React.FC = () => {
         <nav>
           <ul className={`navList ${isMenuOpen ? "active" : ""}`}>
             <li className="navItem">
-              <Link href="/">Главная</Link>
+              <Link href="/" className={pathname === "/" ? "active" : ""}>
+                Главная
+              </Link>
             </li>
             <li className="navItem">
-              <Link href="/about">О нас</Link>
+              <Link href="/menu" className={pathname === "/menu" ? "active" : ""}>
+                Меню
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link href="/brone" className={pathname === "/brone" ? "active" : ""}>
+                Бронирование
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link href="/about" className={pathname === "/about" ? "active" : ""}>
+                О нас
+              </Link>
             </li>
             <li className="navItem">
               <Link href="/corzina">

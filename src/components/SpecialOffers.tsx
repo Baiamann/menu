@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
+import Rating from "./Rating";
 import "./SpecialOffers.css";
 
 interface SpecialItem {
@@ -11,6 +12,7 @@ interface SpecialItem {
   price: number;
   imageUrl: string;
   discount: number;
+  rating: number;
 }
 
 const SpecialOffers: React.FC = () => {
@@ -27,6 +29,7 @@ const SpecialOffers: React.FC = () => {
       price: 1200,
       discount: 20,
       imageUrl: "https://images.unsplash.com/photo-1551892374-ecf7a3b8fba1?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8
     },
     {
       id: 2,
@@ -35,6 +38,7 @@ const SpecialOffers: React.FC = () => {
       price: 950,
       discount: 15,
       imageUrl: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9
     },
     {
       id: 3,
@@ -43,6 +47,7 @@ const SpecialOffers: React.FC = () => {
       price: 1500,
       discount: 10,
       imageUrl: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&auto=format&fit=crop&q=80",
+      rating: 4.7
     },
     {
       id: 4,
@@ -51,6 +56,7 @@ const SpecialOffers: React.FC = () => {
       price: 1100,
       discount: 15,
       imageUrl: "https://images.unsplash.com/photo-1619894991236-5f6a5e0f9024?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8
     },
     {
       id: 5,
@@ -59,6 +65,7 @@ const SpecialOffers: React.FC = () => {
       price: 1000,
       discount: 20,
       imageUrl: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9
     },
     {
       id: 6,
@@ -67,6 +74,7 @@ const SpecialOffers: React.FC = () => {
       price: 1300,
       discount: 15,
       imageUrl: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&auto=format&fit=crop&q=80",
+      rating: 4.6
     },
     {
       id: 7,
@@ -75,6 +83,7 @@ const SpecialOffers: React.FC = () => {
       price: 1800,
       discount: 25,
       imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+      rating: 4.7
     },
     {
       id: 8,
@@ -83,6 +92,7 @@ const SpecialOffers: React.FC = () => {
       price: 600,
       discount: 15,
       imageUrl: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9
     },
     {
       id: 9,
@@ -91,6 +101,7 @@ const SpecialOffers: React.FC = () => {
       price: 450,
       discount: 20,
       imageUrl: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=800&auto=format&fit=crop&q=80",
+      rating: 4.5
     },
   ];
 
@@ -127,10 +138,14 @@ const SpecialOffers: React.FC = () => {
             <div className="menu-card-content">
               <h3 className="menu-card-title">{item.name}</h3>
               <p className="menu-card-description">{item.description}</p>
+              <div className="menu-card-rating">
+                <Rating value={item.rating} />
+                <span className="rating-text">{item.rating.toFixed(1)}</span>
+              </div>
               <div className="price-container">
-                <span className="original-price">{item.price} ₽</span>
+                <span className="original-price">{item.price} сом</span>
                 <span className="discounted-price">
-                  {calculateDiscountedPrice(item.price, item.discount)} ₽
+                  {calculateDiscountedPrice(item.price, item.discount)} сом
                 </span>
                 <span className="discount-badge">-{item.discount}%</span>
               </div>
@@ -153,10 +168,14 @@ const SpecialOffers: React.FC = () => {
             />
             <h3>{selectedItem.name}</h3>
             <p>{selectedItem.description}</p>
+            <div className="modal-rating">
+              <Rating value={selectedItem.rating} />
+              <span className="rating-text">{selectedItem.rating.toFixed(1)}</span>
+            </div>
             <div className="price-container">
-              <span className="original-price">{selectedItem.price} ₽</span>
+              <span className="original-price">{selectedItem.price} сом</span>
               <span className="discounted-price">
-                {calculateDiscountedPrice(selectedItem.price, selectedItem.discount)} ₽
+                {calculateDiscountedPrice(selectedItem.price, selectedItem.discount)} сом
               </span>
               <span className="discount-badge">-{selectedItem.discount}%</span>
             </div>

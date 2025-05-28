@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
+import Rating from "./Rating";
 import "./Menu.css";
 
 interface MenuItem {
@@ -11,6 +12,7 @@ interface MenuItem {
   description: string;
   price: number;
   imageUrl: string;
+  rating: number;
 }
 
 const menuItems: MenuItem[] = [
@@ -20,6 +22,7 @@ const menuItems: MenuItem[] = [
     description: "Классическая лазанья с соусом болоньезе и бешамель",
     price: 1200,
     imageUrl: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=800&auto=format&fit=crop&q=80",
+    rating: 4.8
   },
   {
     id: 2,
@@ -27,6 +30,7 @@ const menuItems: MenuItem[] = [
     description: "Спагетти с беконом, яйцом и пармезаном",
     price: 950,
     imageUrl: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&auto=format&fit=crop&q=80",
+    rating: 4.9
   },
   {
     id: 3,
@@ -34,6 +38,7 @@ const menuItems: MenuItem[] = [
     description: "Кремовое ризотто с белыми грибами и пармезаном",
     price: 850,
     imageUrl: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800&auto=format&fit=crop&q=80",
+    rating: 4.7
   },
   {
     id: 4,
@@ -41,6 +46,7 @@ const menuItems: MenuItem[] = [
     description: "Классическая пицца с томатами и моцареллой",
     price: 750,
     imageUrl: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&auto=format&fit=crop&q=80",
+    rating: 4.6
   },
   {
     id: 5,
@@ -48,6 +54,7 @@ const menuItems: MenuItem[] = [
     description: "Тушеная телячья голень с овощами и ризотто",
     price: 1500,
     imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+    rating: 4.9
   },
   {
     id: 6,
@@ -55,6 +62,7 @@ const menuItems: MenuItem[] = [
     description: "Домашние равиоли с трюфельным соусом",
     price: 1100,
     imageUrl: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=80",
+    rating: 4.8
   },
   {
     id: 7,
@@ -62,6 +70,7 @@ const menuItems: MenuItem[] = [
     description: "Традиционный итальянский овощной суп",
     price: 650,
     imageUrl: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&auto=format&fit=crop&q=80",
+    rating: 4.5
   },
   {
     id: 8,
@@ -69,6 +78,7 @@ const menuItems: MenuItem[] = [
     description: "Телятина с прошутто и шалфеем",
     price: 1300,
     imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+    rating: 4.7
   },
   {
     id: 9,
@@ -76,6 +86,7 @@ const menuItems: MenuItem[] = [
     description: "Паста с соусом из сливок и пармезана",
     price: 900,
     imageUrl: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&auto=format&fit=crop&q=80",
+    rating: 4.6
   },
 ];
 
@@ -127,7 +138,11 @@ const Menu: React.FC = () => {
             <div className="menu-card-content">
               <h3 className="menu-card-title">{item.name}</h3>
               <p className="menu-card-description">{item.description}</p>
-              <p className="menu-card-price">{item.price} ₽</p>
+              <div className="menu-card-rating">
+                <Rating value={item.rating} />
+                <span className="rating-text">{item.rating.toFixed(1)}</span>
+              </div>
+              <p className="menu-card-price">{item.price} сом</p>
             </div>
           </article>
         ))}
@@ -147,7 +162,11 @@ const Menu: React.FC = () => {
             </div>
             <h3>{selectedItem.name}</h3>
             <p>{selectedItem.description}</p>
-            <p>Цена: {selectedItem.price} ₽</p>
+            <div className="modal-rating">
+              <Rating value={selectedItem.rating} />
+              <span className="rating-text">{selectedItem.rating.toFixed(1)}</span>
+            </div>
+            <p className="modal-price">{selectedItem.price} сом</p>
 
             <label>
               Количество:

@@ -59,12 +59,12 @@ const OrderSuccess = ({ orderDetails, onClose }: { orderDetails: any, onClose: (
                   <span className="order-item-name">{item.name} x {item.quantity}</span>
                   <Rating value={item.rating} />
                 </div>
-                <span className="order-item-price">{item.price * item.quantity} ₽</span>
+                <span className="order-item-price">{item.price * item.quantity} сом</span>
               </div>
             ))}
             <div className="order-total">
               <span>Итого:</span>
-              <span>{orderDetails.total} ₽</span>
+              <span>{orderDetails.total} сом</span>
             </div>
           </div>
         </div>
@@ -176,7 +176,10 @@ const Cart: React.FC = () => {
                 <div className="cart-item-details">
                   <h3 className="cart-item-name">{item.name}</h3>
                   <p className="cart-item-description">{item.description}</p>
-                  <p className="cart-item-price">{formatPrice(item.price)}</p>
+                  <div className="cart-item-rating">
+                    <Rating value={item.rating} />
+                  </div>
+                  <p className="cart-item-price">{formatPrice(item.price)} сом</p>
                   <div className="cart-item-quantity">
                     <button
                       className="quantity-button"
@@ -210,7 +213,7 @@ const Cart: React.FC = () => {
             <h3>Сводка заказа</h3>
             <div className="summary-row">
               <span>Подытог:</span>
-              <span>{formatPrice(getTotalPrice())}</span>
+              <span>{formatPrice(getTotalPrice())} сом</span>
             </div>
             <div className="summary-row">
               <span>Доставка:</span>
@@ -218,7 +221,7 @@ const Cart: React.FC = () => {
             </div>
             <div className="summary-row total">
               <span>Итого:</span>
-              <span>{formatPrice(getTotalPrice())}</span>
+              <span>{formatPrice(getTotalPrice())} сом</span>
             </div>
           </div>
 

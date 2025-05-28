@@ -100,11 +100,13 @@ const DessertsList: React.FC = () => {
     setSelectedItem(item);
     setQuantity(1);
     setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
+    document.body.style.overflow = 'unset';
   };
 
   const handleAddToCart = () => {
@@ -134,10 +136,13 @@ const DessertsList: React.FC = () => {
             <div className="menu-card-content">
               <h3 className="menu-card-title">{item.name}</h3>
               <p className="menu-card-description">{item.description}</p>
-              <div className="price-container">
-                <span className="price">{item.price} ₽</span>
+              <div className="menu-card-rating">
+                <Rating value={item.rating} />
+                <span className="rating-text">{item.rating.toFixed(1)}</span>
               </div>
-              <Rating value={item.rating} />
+              <div className="price-container">
+                <span className="price">{item.price} сом</span>
+              </div>
             </div>
           </div>
         ))}
@@ -157,10 +162,13 @@ const DessertsList: React.FC = () => {
             </div>
             <h3>{selectedItem.name}</h3>
             <p>{selectedItem.description}</p>
-            <div className="price-container">
-              <span className="price">{selectedItem.price} ₽</span>
+            <div className="modal-rating">
+              <Rating value={selectedItem.rating} />
+              <span className="rating-text">{selectedItem.rating.toFixed(1)}</span>
             </div>
-            <Rating value={selectedItem.rating} />
+            <div className="price-container">
+              <span className="price">{selectedItem.price} сом</span>
+            </div>
 
             <label>
               Количество:

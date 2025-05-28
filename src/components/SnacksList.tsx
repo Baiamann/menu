@@ -2,14 +2,9 @@
 
 import React, { useState } from "react";
 import { useCart } from "../app/context/CartContext";
+import Image from "next/image";
 import "./SnacksList.css";
-import StarRating from "./StarRating";
-
-interface Review {
-  author: string;
-  rating: number;
-  comment: string;
-}
+import Rating from "./Rating";
 
 interface Snack {
   id: number;
@@ -18,7 +13,6 @@ interface Snack {
   price: number;
   imageUrl: string;
   rating: number;
-  reviews: Review[];
 }
 
 const SnacksList: React.FC = () => {
@@ -33,40 +27,16 @@ const SnacksList: React.FC = () => {
       name: "Брускетта с томатами",
       description: "Хрустящий багет с томатами, базиликом и чесноком, сбрызнутый оливковым маслом",
       price: 350,
-      imageUrl: "/images/snacks/bruschetta.jpg",
-      rating: 4.8,
-      reviews: [
-        {
-          author: "Анна",
-          rating: 5,
-          comment: "Очень вкусно! Свежие томаты и ароматный базилик."
-        },
-        {
-          author: "Михаил",
-          rating: 4,
-          comment: "Хорошая закуска, но можно добавить больше чеснока."
-        }
-      ]
+      imageUrl: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=800&auto=format&fit=crop&q=80",
+      rating: 4.8
     },
     {
       id: 2,
       name: "Карпаччо из говядины",
       description: "Тонко нарезанная маринованная говядина с рукколой, пармезаном и трюфельным маслом",
       price: 650,
-      imageUrl: "/images/snacks/carpaccio.jpg",
-      rating: 4.9,
-      reviews: [
-        {
-          author: "Елена",
-          rating: 5,
-          comment: "Идеальное сочетание вкусов! Мясо тает во рту."
-        },
-        {
-          author: "Дмитрий",
-          rating: 5,
-          comment: "Лучшее карпаччо в городе!"
-        }
-      ]
+      imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+      rating: 4.9
     },
     {
       id: 3,
@@ -74,8 +44,7 @@ const SnacksList: React.FC = () => {
       description: "Куриные крылышки в соусе барбекю",
       price: 450,
       imageUrl: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=800&auto=format&fit=crop&q=80",
-      rating: 4.7,
-      reviews: [],
+      rating: 4.7
     },
     {
       id: 4,
@@ -83,8 +52,7 @@ const SnacksList: React.FC = () => {
       description: "Хрустящие палочки с моцареллой",
       price: 300,
       imageUrl: "https://images.unsplash.com/photo-1562967915-92ae0c320a1c?w=800&auto=format&fit=crop&q=80",
-      rating: 4.6,
-      reviews: [],
+      rating: 4.6
     },
     {
       id: 5,
@@ -92,8 +60,7 @@ const SnacksList: React.FC = () => {
       description: "Жареные кальмары с соусом",
       price: 400,
       imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=80",
-      rating: 4.5,
-      reviews: [],
+      rating: 4.5
     },
     {
       id: 6,
@@ -101,19 +68,7 @@ const SnacksList: React.FC = () => {
       description: "Чипсы с сыром, перцем и соусом",
       price: 350,
       imageUrl: "https://images.unsplash.com/photo-1582169296194-d4d644c48081?w=800&auto=format&fit=crop&q=80",
-      rating: 4.9,
-      reviews: [
-        {
-          author: "Елена",
-          rating: 5,
-          comment: "Идеальное сочетание вкусов! Мясо тает во рту.",
-        },
-        {
-          author: "Дмитрий",
-          rating: 5,
-          comment: "Лучшее карпаччо в городе!",
-        },
-      ],
+      rating: 4.9
     },
     {
       id: 7,
@@ -121,8 +76,7 @@ const SnacksList: React.FC = () => {
       description: "Ассорти из маринованных оливок",
       price: 320,
       imageUrl: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
-      rating: 4.3,
-      reviews: [],
+      rating: 4.3
     },
     {
       id: 8,
@@ -130,8 +84,7 @@ const SnacksList: React.FC = () => {
       description: "Хрустящие гренки с чесноком",
       price: 200,
       imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e505484ba?w=800&auto=format&fit=crop&q=80",
-      rating: 4.2,
-      reviews: [],
+      rating: 4.2
     },
     {
       id: 9,
@@ -139,20 +92,21 @@ const SnacksList: React.FC = () => {
       description: "Мидии в белом вине",
       price: 550,
       imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=80",
-      rating: 4.1,
-      reviews: [],
-    },
+      rating: 4.1
+    }
   ];
 
   const openModal = (snack: Snack) => {
     setSelectedSnack(snack);
     setQuantity(1);
     setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSnack(null);
+    document.body.style.overflow = 'unset';
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -177,26 +131,24 @@ const SnacksList: React.FC = () => {
       <div className="menu-grid">
         {snacks.map((snack) => (
           <div key={snack.id} className="menu-card" onClick={() => openModal(snack)}>
-            <img src={snack.imageUrl} alt={snack.name} />
+            <div className="menu-card-image-container">
+              <Image
+                src={snack.imageUrl}
+                alt={snack.name}
+                width={320}
+                height={180}
+                className="menu-card-image"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="menu-card-content">
               <h3 className="menu-card-title">{snack.name}</h3>
               <p className="menu-card-description">{snack.description}</p>
               <div className="menu-card-rating">
-                <StarRating rating={snack.rating} />
+                <Rating value={snack.rating} />
                 <span className="rating-text">{snack.rating.toFixed(1)}</span>
               </div>
-              <div className="menu-card-reviews">
-                {snack.reviews.map((review, index) => (
-                  <div key={index} className="review-item">
-                    <div className="review-header">
-                      <span className="review-author">{review.author}</span>
-                      <StarRating rating={review.rating} />
-                    </div>
-                    <p className="review-comment">{review.comment}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="menu-card-price">{snack.price} с</p>
+              <p className="menu-card-price">{snack.price} сом</p>
             </div>
           </div>
         ))}
@@ -205,18 +157,22 @@ const SnacksList: React.FC = () => {
       {isModalOpen && selectedSnack && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selectedSnack.imageUrl}
-              alt={selectedSnack.name}
-              style={{
-                width: "100%",
-                borderRadius: "8px",
-                marginBottom: "1rem",
-              }}
-            />
+            <div className="modal-image-container">
+              <Image
+                src={selectedSnack.imageUrl}
+                alt={selectedSnack.name}
+                width={500}
+                height={300}
+                style={{ objectFit: 'cover', borderRadius: '8px' }}
+              />
+            </div>
             <h3>{selectedSnack.name}</h3>
             <p>{selectedSnack.description}</p>
-            <p>Цена: {selectedSnack.price} с</p>
+            <div className="modal-rating">
+              <Rating value={selectedSnack.rating} />
+              <span className="rating-text">{selectedSnack.rating.toFixed(1)}</span>
+            </div>
+            <p className="modal-price">{selectedSnack.price} сом</p>
 
             <label>
               Количество:

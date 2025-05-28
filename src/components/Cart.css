@@ -100,10 +100,10 @@
 }
 
 .cart-item-price {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #4CAF50;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
 }
 
 .cart-item-quantity {
@@ -416,4 +416,28 @@
 
 .back-to-home:hover {
   background-color: #45a049;
+}
+
+.cart-item-rating {
+  margin: 0.5rem 0;
+}
+
+.cart-item-rating .star {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.cart-item-rating .star-empty {
+  color: #e0e0e0;
+}
+
+.summary-row span:last-child {
+  font-weight: 500;
+  color: #333;
+}
+
+.summary-row.total span:last-child {
+  font-size: 1.4rem;
+  color: #4CAF50;
 } 

@@ -64,75 +64,108 @@ const mainDishes: MainDishItem[] = [
   },
 ];
 
-// ... rest of the component code ...
+const MainDishesList: React.FC = () => {
+  const { addToCart } = useCart();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<MainDishItem | null>(null);
+  const [quantity, setQuantity] = useState(1);
 
-return (
-  <section className="menu">
-    <h2 className="menu-title">Основные блюда</h2>
-    <p className="menu-subtitle">Традиционные итальянские блюда</p>
-    <div className="menu-grid">
-      {mainDishes.map((item) => (
-        <div key={item.id} className="menu-card" onClick={() => openModal(item)}>
-          <div className="menu-card-image-container">
-            <Image
-              src={item.imageUrl}
-              alt={item.name}
-              width={320}
-              height={180}
-              className="menu-card-image"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-          <div className="menu-card-content">
-            <h3 className="menu-card-title">{item.name}</h3>
-            <p className="menu-card-description">{item.description}</p>
-            <div className="price-container">
-              <span className="price">{item.price} ₽</span>
+  const openModal = (item: MainDishItem) => {
+    setSelectedItem(item);
+    setQuantity(1);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+    document.body.style.overflow = 'unset';
+  };
+
+  const handleAddToCart = () => {
+    if (selectedItem) {
+      addToCart(selectedItem, quantity);
+      closeModal();
+    }
+  };
+
+  return (
+    <section className="menu">
+      <h2 className="menu-title">Основные блюда</h2>
+      <p className="menu-subtitle">Традиционные итальянские блюда</p>
+      <div className="menu-grid">
+        {mainDishes.map((item) => (
+          <div key={item.id} className="menu-card" onClick={() => openModal(item)}>
+            <div className="menu-card-image-container">
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                width={320}
+                height={180}
+                className="menu-card-image"
+                style={{ objectFit: 'cover' }}
+              />
             </div>
-            <Rating value={item.rating} />
+            <div className="menu-card-content">
+              <h3 className="menu-card-title">{item.name}</h3>
+              <p className="menu-card-description">{item.description}</p>
+              <div className="menu-card-rating">
+                <Rating value={item.rating} />
+                <span className="rating-text">{item.rating.toFixed(1)}</span>
+              </div>
+              <div className="price-container">
+                <span className="price">{item.price} сом</span>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-
-    {isModalOpen && selectedItem && (
-      <div className="modalOverlay" onClick={closeModal}>
-        <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-image-container">
-            <Image
-              src={selectedItem.imageUrl}
-              alt={selectedItem.name}
-              width={500}
-              height={300}
-              style={{ objectFit: 'cover', borderRadius: '8px' }}
-            />
-          </div>
-          <h3>{selectedItem.name}</h3>
-          <p>{selectedItem.description}</p>
-          <div className="price-container">
-            <span className="price">{selectedItem.price} ₽</span>
-          </div>
-          <Rating value={selectedItem.rating} />
-
-          <label>
-            Количество:
-            <input
-              type="number"
-              min="1"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              style={{ marginLeft: "0.5rem", width: "60px" }}
-            />
-          </label>
-
-          <div className="modalButtons" style={{ marginTop: "1rem" }}>
-            <button onClick={handleAddToCart}>Добавить в корзину</button>
-            <button onClick={closeModal} style={{ marginLeft: "1rem" }}>
-              Отмена
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
-    )}
-  </section>
-); 
+
+      {isModalOpen && selectedItem && (
+        <div className="modalOverlay" onClick={closeModal}>
+          <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image-container">
+              <Image
+                src={selectedItem.imageUrl}
+                alt={selectedItem.name}
+                width={500}
+                height={300}
+                style={{ objectFit: 'cover', borderRadius: '8px' }}
+              />
+            </div>
+            <h3>{selectedItem.name}</h3>
+            <p>{selectedItem.description}</p>
+            <div className="modal-rating">
+              <Rating value={selectedItem.rating} />
+              <span className="rating-text">{selectedItem.rating.toFixed(1)}</span>
+            </div>
+            <div className="price-container">
+              <span className="price">{selectedItem.price} сом</span>
+            </div>
+
+            <label>
+              Количество:
+              <input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                style={{ marginLeft: "0.5rem", width: "60px" }}
+              />
+            </label>
+
+            <div className="modalButtons" style={{ marginTop: "1rem" }}>
+              <button onClick={handleAddToCart}>Добавить в корзину</button>
+              <button onClick={closeModal} style={{ marginLeft: "1rem" }}>
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default MainDishesList; 

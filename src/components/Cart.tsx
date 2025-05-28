@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Rating from "./Rating";
 import "./Cart.css";
+import { useRouter } from "next/navigation";
 
 interface CartItem {
   id: number;
@@ -79,8 +80,9 @@ const OrderSuccess = ({ orderDetails, onClose }: { orderDetails: any, onClose: (
   );
 };
 
-const Cart = () => {
-  const { items, removeFromCart, updateQuantity, total } = useCart();
+const Cart: React.FC = () => {
+  const { items, removeFromCart, updateQuantity, getTotalPrice, formatPrice } = useCart();
+  const router = useRouter();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -143,206 +145,186 @@ const Cart = () => {
         address: formData.address,
         comment: formData.notes,
         items: items,
-        total: total
+        total: getTotalPrice()
       }} onClose={() => setOrderPlaced(false)} />
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className="cart-empty">
+        <h2>Корзина пуста</h2>
+        <p>Добавьте товары из меню</p>
+        <button onClick={() => router.push("/")} className="back-to-menu">
+          Перейти в меню
+        </button>
+      </div>
     );
   }
 
   return (
     <div className="cart-container">
-      <div className="cart-content">
-        <h2 className="cart-title">Корзина</h2>
-
-        {items?.length === 0 ? (
-          <div className="empty-cart">
-            <p>Ваша корзина пуста</p>
-            <Link href="/">
-              <span className="continue-shopping">Перейти в меню</span>
-            </Link>
-          </div>
-        ) : (
-          <div className="cart-layout">
-            <div className="cart-items-section">
-              <div className="cart-items">
-                {items.map((item) => (
-                  <div key={item.id} className="cart-item">
-                    <div className="item-image">
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.name}
-                        width={100}
-                        height={100}
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                    <div className="item-details">
-                      <h3 className="item-name">{item.name}</h3>
-                      <p className="item-description">{item.description}</p>
-                      <div className="item-rating">
-                        <Rating value={item.rating} />
-                      </div>
-                      <div className="item-controls">
-                        <div className="quantity-controls">
-                          <button
-                            onClick={() =>
-                              handleQuantityChange(item.id, item.quantity - 1)
-                            }
-                            className="quantity-btn"
-                            disabled={item.quantity <= 1}
-                          >
-                            -
-                          </button>
-                          <span className="quantity">{item.quantity}</span>
-                          <button
-                            onClick={() =>
-                              handleQuantityChange(item.id, item.quantity + 1)
-                            }
-                            className="quantity-btn"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <div className="price-controls">
-                          <span className="item-price">{item.price} ₽</span>
-                          <span className="item-total">
-                            {item.price * item.quantity} ₽
-                          </span>
-                          <button
-                            onClick={() => removeFromCart(item.id)}
-                            className="remove-btn"
-                          >
-                            Удалить
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="order-section">
-              <div className="order-summary">
-                <h3>Сводка заказа</h3>
-                <div className="summary-row">
-                  <span>Подытог:</span>
-                  <span>{total} ₽</span>
+      <h2 className="cart-title">Корзина</h2>
+      <div className="cart-layout">
+        <div className="cart-items-section">
+          <div className="cart-items">
+            {items.map((item) => (
+              <div key={item.id} className="cart-item">
+                <div className="cart-item-image">
+                  <img src={item.imageUrl} alt={item.name} />
                 </div>
-                <div className="summary-row">
-                  <span>Доставка:</span>
-                  <span>Бесплатно</span>
-                </div>
-                <div className="summary-row total">
-                  <span>Итого:</span>
-                  <span>{total} ₽</span>
-                </div>
-              </div>
-
-              <form onSubmit={handleOrder} className="order-form">
-                <h3>Оформление заказа</h3>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="firstName">Имя *</label>
-                    <input
-                      id="firstName"
-                      name="firstName"
-                      type="text"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastName">Фамилия *</label>
-                    <input
-                      id="lastName"
-                      name="lastName"
-                      type="text"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      required
-                    />
+                <div className="cart-item-details">
+                  <h3 className="cart-item-name">{item.name}</h3>
+                  <p className="cart-item-description">{item.description}</p>
+                  <p className="cart-item-price">{formatPrice(item.price)}</p>
+                  <div className="cart-item-quantity">
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                      disabled={item.quantity <= 1}
+                    >
+                      -
+                    </button>
+                    <span className="quantity-number">{item.quantity}</span>
+                    <button
+                      className="quantity-button"
+                      onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone">Телефон *</label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="address">Адрес доставки *</label>
-                  <input
-                    id="address"
-                    name="address"
-                    type="text"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="city">Город</label>
-                    <input
-                      id="city"
-                      name="city"
-                      type="text"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="postalCode">Индекс</label>
-                    <input
-                      id="postalCode"
-                      name="postalCode"
-                      type="text"
-                      value={formData.postalCode}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="notes">Примечания к заказу</label>
-                  <textarea
-                    id="notes"
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleInputChange}
-                    placeholder="Например: не звонить в дверь, позвонить по телефону"
-                  />
-                </div>
-
-                <button type="submit" className="submit-order">
-                  Оформить заказ
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Удалить
                 </button>
-              </form>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="order-section">
+          <div className="order-summary">
+            <h3>Сводка заказа</h3>
+            <div className="summary-row">
+              <span>Подытог:</span>
+              <span>{formatPrice(getTotalPrice())}</span>
+            </div>
+            <div className="summary-row">
+              <span>Доставка:</span>
+              <span>Бесплатно</span>
+            </div>
+            <div className="summary-row total">
+              <span>Итого:</span>
+              <span>{formatPrice(getTotalPrice())}</span>
             </div>
           </div>
-        )}
+
+          <form onSubmit={handleOrder} className="order-form">
+            <h3>Оформление заказа</h3>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="firstName">Имя *</label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Фамилия *</label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Телефон *</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="address">Адрес доставки *</label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                value={formData.address}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="city">Город</label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="postalCode">Индекс</label>
+                <input
+                  id="postalCode"
+                  name="postalCode"
+                  type="text"
+                  value={formData.postalCode}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="notes">Примечания к заказу</label>
+              <textarea
+                id="notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleInputChange}
+                placeholder="Например: не звонить в дверь, позвонить по телефону"
+              />
+            </div>
+
+            <button type="submit" className="submit-order">
+              Оформить заказ
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

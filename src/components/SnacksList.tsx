@@ -1,18 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../app/context/CartContext";
 import "./SnacksList.css";
 import StarRating from "./StarRating";
-
-interface SnacksListProps {
-  onAddToCart: (item: {
-    id: string;
-    name: string;
-    price: number;
-    imageUrl: string;
-  }) => void;
-}
 
 interface Review {
   author: string;
@@ -21,7 +12,7 @@ interface Review {
 }
 
 interface Snack {
-  id: string;
+  id: number;
   name: string;
   description: string;
   price: number;
@@ -30,7 +21,7 @@ interface Snack {
   reviews: Review[];
 }
 
-const SnacksList = ({ onAddToCart }: SnacksListProps) => {
+const SnacksList: React.FC = () => {
   const { addToCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSnack, setSelectedSnack] = useState<Snack | null>(null);
@@ -38,10 +29,9 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
 
   const snacks: Snack[] = [
     {
-      id: "snack1",
+      id: 1,
       name: "Брускетта с томатами",
-      description:
-        "Хрустящий багет с томатами, базиликом и чесноком, сбрызнутый оливковым маслом",
+      description: "Хрустящий багет с томатами, базиликом и чесноком, сбрызнутый оливковым маслом",
       price: 350,
       imageUrl: "/images/snacks/bruschetta.jpg",
       rating: 4.8,
@@ -49,20 +39,19 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
         {
           author: "Анна",
           rating: 5,
-          comment: "Очень вкусно! Свежие томаты и ароматный базилик.",
+          comment: "Очень вкусно! Свежие томаты и ароматный базилик."
         },
         {
           author: "Михаил",
           rating: 4,
-          comment: "Хорошая закуска, но можно добавить больше чеснока.",
-        },
-      ],
+          comment: "Хорошая закуска, но можно добавить больше чеснока."
+        }
+      ]
     },
     {
-      id: "snack2",
+      id: 2,
       name: "Карпаччо из говядины",
-      description:
-        "Тонко нарезанная маринованная говядина с рукколой, пармезаном и трюфельным маслом",
+      description: "Тонко нарезанная маринованная говядина с рукколой, пармезаном и трюфельным маслом",
       price: 650,
       imageUrl: "/images/snacks/carpaccio.jpg",
       rating: 4.9,
@@ -70,17 +59,17 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
         {
           author: "Елена",
           rating: 5,
-          comment: "Идеальное сочетание вкусов! Мясо тает во рту.",
+          comment: "Идеальное сочетание вкусов! Мясо тает во рту."
         },
         {
           author: "Дмитрий",
           rating: 5,
-          comment: "Лучшее карпаччо в городе!",
-        },
-      ],
+          comment: "Лучшее карпаччо в городе!"
+        }
+      ]
     },
     {
-      id: "snack3",
+      id: 3,
       name: "Крылышки",
       description: "Куриные крылышки в соусе барбекю",
       price: 450,
@@ -89,7 +78,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       reviews: [],
     },
     {
-      id: "snack4",
+      id: 4,
       name: "Сырные палочки",
       description: "Хрустящие палочки с моцареллой",
       price: 300,
@@ -98,7 +87,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       reviews: [],
     },
     {
-      id: "snack5",
+      id: 5,
       name: "Кальмары",
       description: "Жареные кальмары с соусом",
       price: 400,
@@ -107,7 +96,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       reviews: [],
     },
     {
-      id: "snack6",
+      id: 6,
       name: "Начос",
       description: "Чипсы с сыром, перцем и соусом",
       price: 350,
@@ -127,7 +116,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       ],
     },
     {
-      id: "snack7",
+      id: 7,
       name: "Оливки",
       description: "Ассорти из маринованных оливок",
       price: 320,
@@ -136,7 +125,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       reviews: [],
     },
     {
-      id: "snack8",
+      id: 8,
       name: "Гренки",
       description: "Хрустящие гренки с чесноком",
       price: 200,
@@ -145,7 +134,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
       reviews: [],
     },
     {
-      id: "snack9",
+      id: 9,
       name: "Мидии",
       description: "Мидии в белом вине",
       price: 550,
@@ -166,9 +155,18 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
     setSelectedSnack(null);
   };
 
-  const handleAddToCart = () => {
-    if (selectedSnack && quantity > 0) {
-      addToCart(selectedSnack, quantity);
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (selectedSnack) {
+      addToCart({
+        id: selectedSnack.id,
+        name: selectedSnack.name,
+        price: selectedSnack.price,
+        imageUrl: selectedSnack.imageUrl,
+        description: selectedSnack.description,
+        rating: selectedSnack.rating
+      }, quantity);
       closeModal();
     }
   };
@@ -198,7 +196,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
                   </div>
                 ))}
               </div>
-              <p className="menu-card-price">{snack.price} ₽</p>
+              <p className="menu-card-price">{snack.price} с</p>
             </div>
           </div>
         ))}
@@ -218,7 +216,7 @@ const SnacksList = ({ onAddToCart }: SnacksListProps) => {
             />
             <h3>{selectedSnack.name}</h3>
             <p>{selectedSnack.description}</p>
-            <p>Цена: {selectedSnack.price} ₽</p>
+            <p>Цена: {selectedSnack.price} с</p>
 
             <label>
               Количество:

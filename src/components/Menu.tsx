@@ -116,8 +116,11 @@ const Menu: React.FC = () => {
   };
 
   return (
-    <section className="menu">
-      <h2 className="menu-title">Основные блюда</h2>
+    <div className="menu">
+      <div className="menu-header">
+        <h1 className="menu-title">Меню ресторана</h1>
+        <p className="menu-subtitle">Откройте для себя изысканные блюда, приготовленные с любовью нашими шеф-поварами</p>
+      </div>
       <div className="menu-grid">
         {menuItems.map((item) => (
           <article
@@ -188,7 +191,7 @@ const Menu: React.FC = () => {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

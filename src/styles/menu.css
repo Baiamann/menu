@@ -1,0 +1,327 @@
+.menu {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(255, 152, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+}
+
+.menu-title {
+  font-family: var(--font-playfair);
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #f57c00, #ff9800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: -1px;
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.menu-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+  border-radius: 2px;
+}
+
+.menu-subtitle {
+  font-family: var(--font-cormorant);
+  font-size: 1.5rem;
+  color: #f57c00;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
+}
+
+.menu-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card-image-container {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-card:hover .menu-card-image {
+  transform: scale(1.1);
+}
+
+.menu-card-content {
+  padding: 1.8rem;
+  background: white;
+}
+
+.menu-card-title {
+  font-family: var(--font-playfair);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.menu-card-description {
+  font-family: var(--font-cormorant);
+  font-size: 1.1rem;
+  color: #636e72;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.menu-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.rating-text {
+  font-size: 1rem;
+  color: #2d3436;
+  font-weight: 600;
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #f1f1f1;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00b894;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1.5rem;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 650px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-image-container {
+  width: 100%;
+  height: 350px;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modalContent h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.modalContent p {
+  font-size: 1.1rem;
+  color: #636e72;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  padding: 0.8rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.modalButtons button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalButtons button:first-child {
+  background: linear-gradient(45deg, #00b894, #00a884);
+  color: white;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.modalButtons button:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+.modalButtons button:last-child {
+  background: #f8f9fa;
+  color: #2d3436;
+  padding: 1rem 2rem;
+}
+
+.modalButtons button:last-child:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+/* Quantity Input */
+.modalContent label {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 2rem 0;
+  font-size: 1.1rem;
+  color: #2d3436;
+  font-weight: 500;
+}
+
+.modalContent input[type="number"] {
+  width: 100px;
+  padding: 0.8rem;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #2d3436;
+  transition: all 0.3s ease;
+}
+
+.modalContent input[type="number"]:focus {
+  outline: none;
+  border-color: #00b894;
+  box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+}
+
+/* Scrollbar Styles */
+.modalContent::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: #dfe6e9;
+  border-radius: 5px;
+  border: 2px solid #f8f9fa;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: #b2bec3;
+} 

@@ -33,11 +33,7 @@ const Header: React.FC = () => {
                 Главная
               </Link>
             </li>
-            <li className="navItem">
-              <Link href="/menu" className={pathname === "/menu" ? "active" : ""}>
-                Меню
-              </Link>
-            </li>
+
             <li className="navItem">
               <Link href="/brone" className={pathname === "/brone" ? "active" : ""}>
                 Бронирование

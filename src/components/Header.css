@@ -20,7 +20,7 @@
 .logo a {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .navItem a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
   font-size: 1rem;
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import "./Modal.css";
+import React from 'react';
+import './Modal.css';
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,7 +10,9 @@ interface ModalProps {
   itemImage: string;
   itemPrice: number;
   itemDescription: string;
-  onAddToCart: (quantity: number) => void;
+  quantity: number;
+  setQuantity: (quantity: number) => void;
+  onAddToCart: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -20,69 +22,59 @@ const Modal: React.FC<ModalProps> = ({
   itemImage,
   itemPrice,
   itemDescription,
-  onAddToCart,
+  quantity,
+  setQuantity,
+  onAddToCart
 }) => {
-  const [quantity, setQuantity] = useState(1);
-
   if (!isOpen) return null;
 
-  const handleIncrement = () => {
-    setQuantity(prev => prev + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(prev => prev - 1);
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0) {
+      setQuantity(value);
     }
   };
 
-  const totalPrice = itemPrice * quantity;
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          <i className="fas fa-times"></i>
-        </button>
-        
-        <div className="modal-image">
-          <img src={itemImage} alt={itemName} />
-        </div>
-        
-        <div className="modal-details">
-          <h2 className="modal-title">{itemName}</h2>
-          <p className="modal-description">{itemDescription}</p>
-          
-          <div className="modal-price">
-            <span className="price-label">Цена:</span>
-            <span className="price-value">{itemPrice} ₽</span>
-          </div>
-          
-          <div className="modal-quantity">
-            <span className="quantity-label">Количество:</span>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>×</button>
+        <div className="modal-content">
+          <img src={itemImage} alt={itemName} className="modal-image" />
+          <div className="modal-info">
+            <h2 className="modal-title">{itemName}</h2>
+            <p className="modal-description">{itemDescription}</p>
+            <div className="modal-price">{itemPrice} ₽</div>
             <div className="quantity-controls">
-              <button onClick={handleDecrement} className="quantity-btn">
-                <i className="fas fa-minus"></i>
+              <button className="quantity-btn" onClick={decrementQuantity}>-</button>
+              <input
+                type="number"
+                className="quantity-input"
+                value={quantity}
+                onChange={handleQuantityChange}
+                min="1"
+              />
+              <button className="quantity-btn" onClick={incrementQuantity}>+</button>
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn add-btn" onClick={onAddToCart}>
+                Добавить в корзину
               </button>
-              <span className="quantity-value">{quantity}</span>
-              <button onClick={handleIncrement} className="quantity-btn">
-                <i className="fas fa-plus"></i>
-        </button>
+              <button className="modal-btn cancel-btn" onClick={onClose}>
+                Отмена
+              </button>
             </div>
           </div>
-          
-          <div className="modal-total">
-            <span className="total-label">Итого:</span>
-            <span className="total-value">{totalPrice} ₽</span>
-          </div>
-          
-          <button 
-            className="modal-add-btn"
-            onClick={() => onAddToCart(quantity)}
-          >
-            <i className="fas fa-shopping-cart"></i>
-            Добавить в корзину
-        </button>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ const DessertsList: React.FC = () => {
       name: "Тирамису",
       description: "Классический итальянский десерт с маскарпоне и кофе",
       price: 450,
-      imageUrl: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80",
       rating: 4.8,
     },
     {
@@ -35,7 +35,7 @@ const DessertsList: React.FC = () => {
       name: "Панна Котта",
       description: "Нежный сливочный десерт с ягодным соусом",
       price: 350,
-      imageUrl: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800&q=80",
       rating: 4.6,
     },
     {
@@ -43,7 +43,7 @@ const DessertsList: React.FC = () => {
       name: "Канноли",
       description: "Хрустящие трубочки с кремом из рикотты",
       price: 280,
-      imageUrl: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1613145998571-740d61b8d4e0?auto=format&fit=crop&w=800&q=80",
       rating: 4.7,
     },
     {
@@ -51,7 +51,7 @@ const DessertsList: React.FC = () => {
       name: "Джелато",
       description: "Итальянское мороженое с различными вкусами",
       price: 250,
-      imageUrl: "https://images.unsplash.com/photo-1465101178521-c1a9136a3fd8?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1625937289652-474d54c85703?auto=format&fit=crop&w=800&q=80",
       rating: 4.9,
     },
     {
@@ -59,7 +59,7 @@ const DessertsList: React.FC = () => {
       name: "Забайоне",
       description: "Воздушный десерт из яиц, сахара и вина",
       price: 320,
-      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
       rating: 4.5,
     },
     {
@@ -67,7 +67,7 @@ const DessertsList: React.FC = () => {
       name: "Бучеллато",
       description: "Сицилийский пирог с инжиром, орехами и цукатами",
       price: 300,
-      imageUrl: "https://images.unsplash.com/photo-1501436513142-1e47c2023431?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1604152135912-04a022e236b5?auto=format&fit=crop&w=800&q=80",
       rating: 4.4,
     },
     {
@@ -75,7 +75,7 @@ const DessertsList: React.FC = () => {
       name: "Семифредо",
       description: "Полузамороженный десерт с кремом и ягодами",
       price: 380,
-      imageUrl: "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1608133450964-e0c81ed5252e?auto=format&fit=crop&w=800&q=80",
       rating: 4.6,
     },
     {
@@ -83,7 +83,7 @@ const DessertsList: React.FC = () => {
       name: "Кростата",
       description: "Открытый пирог с фруктовой начинкой",
       price: 350,
-      imageUrl: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1627637453826-b41b7024e2a4?auto=format&fit=crop&w=800&q=80",
       rating: 4.5,
     },
     {
@@ -91,10 +91,14 @@ const DessertsList: React.FC = () => {
       name: "Зепполе",
       description: "Итальянские пончики с сахарной пудрой",
       price: 280,
-      imageUrl: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?w=800&auto=format&fit=crop&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1548943487-a2e4d1c7d6bc?auto=format&fit=crop&w=800&q=80",
       rating: 4.3,
     },
   ];
+  
+    
+    
+
 
   const openModal = (item: DessertItem) => {
     setSelectedItem(item);

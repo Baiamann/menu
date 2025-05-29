@@ -1,235 +1,228 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import "./brone.css";
+import React, { useState } from 'react';
+import styles from './brone.module.css';
 
-const Brone = () => {
-  const router = useRouter();
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+const BookingPage = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    time: "",
-    guests: ""
-  });
-  const [errors, setErrors] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    time: "",
-    guests: ""
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
+    guests: '2',
+    specialRequests: ''
   });
 
-  const validatePhone = (phone: string) => {
-    const phoneRegex = /^\+996\s?\(?[0-9]{3}\)?\s?[0-9]{2}-?[0-9]{2}-?[0-9]{2}$/;
-    return phoneRegex.test(phone);
-  };
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [success, setSuccess] = useState(false);
 
-  const validateForm = () => {
-    const newErrors = {
-      name: "",
-      phone: "",
-      date: "",
-      time: "",
-      guests: ""
-    };
-    let isValid = true;
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Введите ваше имя";
-      isValid = false;
-    }
-
-    if (!validatePhone(formData.phone)) {
-      newErrors.phone = "Введите корректный номер телефона (+996 XXX XX-XX-XX)";
-      isValid = false;
-    }
-
-    if (!formData.date) {
-      newErrors.date = "Выберите дату";
-      isValid = false;
-    }
-
-    if (!formData.time) {
-      newErrors.time = "Выберите время";
-      isValid = false;
-    }
-
-    if (!formData.guests) {
-      newErrors.guests = "Выберите количество гостей";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    if (errors[name as keyof typeof errors]) {
+    // Clear error when user starts typing
+    if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ""
+        [name]: ''
       }));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Пожалуйста, введите ваше имя';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Пожалуйста, введите ваш email';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Пожалуйста, введите корректный email';
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Пожалуйста, введите ваш телефон';
+    }
+    
+    if (!formData.date) {
+      newErrors.date = 'Пожалуйста, выберите дату';
+    }
+    
+    if (!formData.time) {
+      newErrors.time = 'Пожалуйста, выберите время';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (validateForm()) {
-      setIsSuccessModalOpen(true);
+      // Here you would typically send the data to your backend
+      console.log('Form submitted:', formData);
+      setSuccess(true);
     }
-  };
-
-  const handleGoHome = () => {
-    router.push('/');
-  };
-
-  const formatPhoneNumber = (value: string) => {
-    const numbers = value.replace(/\D/g, '');
-    let formatted = '+996 ';
-    if (numbers.length > 0) {
-      formatted += `(${numbers.slice(0, 3)}`;
-      if (numbers.length > 3) {
-        formatted += `) ${numbers.slice(3, 5)}`;
-        if (numbers.length > 5) {
-          formatted += `-${numbers.slice(5, 7)}`;
-          if (numbers.length > 7) {
-            formatted += `-${numbers.slice(7, 9)}`;
-          }
-        }
-      }
-    }
-    return formatted;
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhoneNumber(e.target.value);
-    setFormData(prev => ({
-      ...prev,
-      phone: formatted
-    }));
   };
 
   return (
-    <main className="booking-page">
-      <div className="booking-container">
-        <h1>Забронировать стол</h1>
-        <form onSubmit={handleSubmit} className="booking-form">
-          <div className="form-group">
-            <label htmlFor="name">Ваше имя</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Введите ваше имя"
-              className={errors.name ? "error" : ""}
-            />
-            {errors.name && <span className="error-message">{errors.name}</span>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="phone">Телефон</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handlePhoneChange}
-              placeholder="+996 (XXX) XX-XX-XX"
-              className={errors.phone ? "error" : ""}
-            />
-            {errors.phone && <span className="error-message">{errors.phone}</span>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="date">Дата</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-              min={new Date().toISOString().split('T')[0]}
-              className={errors.date ? "error" : ""}
-            />
-            {errors.date && <span className="error-message">{errors.date}</span>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="time">Время</label>
-            <input
-              type="time"
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleInputChange}
-              min="10:00"
-              max="22:00"
-              className={errors.time ? "error" : ""}
-            />
-            {errors.time && <span className="error-message">{errors.time}</span>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="guests">Количество гостей</label>
-            <select
-              id="guests"
-              name="guests"
-              value={formData.guests}
-              onChange={handleInputChange}
-              className={errors.guests ? "error" : ""}
-            >
-              <option value="">Выберите количество гостей</option>
-              <option value="1">1 гость</option>
-              <option value="2">2 гостя</option>
-              <option value="3">3 гостя</option>
-              <option value="4">4 гостя</option>
-              <option value="5">5 гостей</option>
-              <option value="6">6 гостей</option>
-            </select>
-            {errors.guests && <span className="error-message">{errors.guests}</span>}
-          </div>
-
-          <button type="submit" className="submit-button">
-            Забронировать
-          </button>
-        </form>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Забронировать столик</h1>
+        <p>Заполните форму ниже, чтобы забронировать столик в нашем ресторане</p>
       </div>
 
-      {isSuccessModalOpen && (
-        <div className="modal-overlay">
-          <div className="success-modal">
-            <div className="success-content">
-              <div className="success-icon">✓</div>
-              <h2>Стол успешно забронирован!</h2>
-              <div className="booking-details">
-                <p><strong>Имя:</strong> {formData.name}</p>
-                <p><strong>Телефон:</strong> {formData.phone}</p>
-                <p><strong>Дата:</strong> {new Date(formData.date).toLocaleDateString()}</p>
-                <p><strong>Время:</strong> {formData.time}</p>
-                <p><strong>Количество гостей:</strong> {formData.guests}</p>
-              </div>
-              <p className="success-message">
-                Мы свяжемся с вами для подтверждения бронирования.
-              </p>
-              <button onClick={handleGoHome} className="home-button">
-                На главную
-              </button>
-            </div>
-          </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="name">Имя</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Введите ваше имя"
+          />
+          {errors.name && <div className={styles.error}>{errors.name}</div>}
         </div>
-      )}
-    </main>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Введите ваш email"
+          />
+          {errors.email && <div className={styles.error}>{errors.email}</div>}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="phone">Телефон</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Введите ваш телефон"
+          />
+          {errors.phone && <div className={styles.error}>{errors.phone}</div>}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="date">Дата</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          {errors.date && <div className={styles.error}>{errors.date}</div>}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="time">Время</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          {errors.time && <div className={styles.error}>{errors.time}</div>}
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="guests">Количество гостей</label>
+          <select
+            id="guests"
+            name="guests"
+            value={formData.guests}
+            onChange={handleChange}
+            className={styles.select}
+          >
+            <option value="1">1 гость</option>
+            <option value="2">2 гостя</option>
+            <option value="3">3 гостя</option>
+            <option value="4">4 гостя</option>
+            <option value="5">5 гостей</option>
+            <option value="6">6 гостей</option>
+            <option value="7">7 гостей</option>
+            <option value="8">8 гостей</option>
+          </select>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="specialRequests">Особые пожелания</label>
+          <textarea
+            id="specialRequests"
+            name="specialRequests"
+            value={formData.specialRequests}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="Напишите ваши особые пожелания"
+            rows={4}
+          />
+        </div>
+
+        <button type="submit" className={styles.button}>
+          Забронировать
+        </button>
+
+        {success && (
+          <div className={styles.success}>
+            <h2 className={styles.successTitle}>Бронирование подтверждено!</h2>
+            <div className={styles.successDetails}>
+              <div className={styles.successDetail}>
+                <span className={styles.successDetailLabel}>Имя:</span>
+                <span className={styles.successDetailValue}>{formData.name}</span>
+              </div>
+              <div className={styles.successDetail}>
+                <span className={styles.successDetailLabel}>Дата:</span>
+                <span className={styles.successDetailValue}>{formatDate(formData.date)}</span>
+              </div>
+              <div className={styles.successDetail}>
+                <span className={styles.successDetailLabel}>Время:</span>
+                <span className={styles.successDetailValue}>{formData.time}</span>
+              </div>
+              <div className={styles.successDetail}>
+                <span className={styles.successDetailLabel}>Количество гостей:</span>
+                <span className={styles.successDetailValue}>{formData.guests}</span>
+              </div>
+            </div>
+            <p className={styles.successMessage}>
+              Спасибо за бронирование! Мы отправили подтверждение на ваш email. 
+              Если у вас возникнут вопросы, пожалуйста, свяжитесь с нами по телефону.
+            </p>
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
 
-export default Brone; 
+export default BookingPage; 
